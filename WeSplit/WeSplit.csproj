@@ -107,7 +107,12 @@
   <ItemGroup>
     <Resource Include="SplashScreen.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\detail.png" />
+    <Resource Include="Images\red-flag.png" />
+    <Resource Include="Images\update.png" />
+    <Resource Include="Images\white-flag.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Images\SplashScreen\hochiminh.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -130,6 +135,16 @@
     <None Include="Images\SplashScreen\vinhhalong.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PlaceImages\DongBangSongCuuLong.jpg" />
+    <Resource Include="Images\PlaceImages\HoGuom.jpg" />
+    <Resource Include="Images\PlaceImages\NhaHatLonHaNoi.jpg" />
+    <Resource Include="Images\PlaceImages\PhoCoHoiAn.jpg" />
+    <Resource Include="Images\PlaceImages\PhuQuoc.jpg" />
+    <Resource Include="Images\PlaceImages\QuangTruongBaDinh.jpg" />
+    <Resource Include="Images\PlaceImages\RuongBacThang.jpg" />
+    <Resource Include="Images\PlaceImages\VinhHaLong.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

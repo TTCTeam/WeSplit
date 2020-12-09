@@ -5,8 +5,137 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WeSplit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="750" Width="1300" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
+        
+        <!--LISTVIEW ITEM-->
+        <ListView Name="dataListView"
+                  Background="AntiqueWhite"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  BorderThickness="0"
+                  SelectionChanged="dataListView_SelectionChanged">
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="2,5,2,4">
+
+                        <Border Name="Mask"
+                                Background="White"
+                                CornerRadius="12" />
+
+                        <StackPanel Width="340"
+                                    Height="190"
+                                    Orientation="Vertical">
+
+                            <StackPanel.Background>
+                                <ImageBrush ImageSource="{Binding Thumbnail}"/>
+                            </StackPanel.Background>
+
+                            <StackPanel.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=Mask}" />
+                            </StackPanel.OpacityMask>
+
+                            <TextBlock FontFamily="Corbel"
+                                       Margin="0,10,0,0"
+                                       Text="{Binding Name}"
+                                       HorizontalAlignment="Center"
+                                       Foreground="White"
+                                       FontWeight="Bold"
+                                       FontSize="20"/>
+
+                            <Button BorderThickness="0"
+                                    Margin="0,-26,5,0"
+                                    Name="FlagButton"
+                                    Height="25" Width="25"
+                                    HorizontalAlignment="Right"
+                                    Click="FlagButton_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Images/red-flag.png" />
+                                </Button.Background>
+                            </Button>
+
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,116,0,0">
+
+                                <Button Width="160"
+                                        Height="30"
+                                        x:Name="DetailButton"
+                                        Background="Transparent"
+                                        BorderBrush="White" BorderThickness="1"
+                                        Click="DetailButton_Click"
+                                        Margin="0,0,8,0">
+
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="8"/>
+                                        </Style>
+                                    </Button.Resources>
+
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Height="18"
+                                                   Source="Images/detail.png"
+                                                   RenderOptions.BitmapScalingMode="HighQuality"
+                                                   Margin="0,0,6,0"/>
+
+                                            <TextBlock FontSize="14"
+                                                       VerticalAlignment="Center"
+                                                       FontFamily="Corbel"
+                                                       Text="Detail"
+                                                       FontWeight="Bold"
+                                                       Foreground="White"
+                                                       Margin="6,0,0,0"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+
+                                <Button Width="160"
+                                        Height="30"
+                                        x:Name="UpdateButton"
+                                        Background="Transparent"
+                                        BorderBrush="White" BorderThickness="1"
+                                        Click="UpdateButton_Click">
+
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="8"/>
+                                        </Style>
+                                    </Button.Resources>
+
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Height="18"
+                                                   Source="Images/update.png"
+                                                   RenderOptions.BitmapScalingMode="HighQuality"
+                                                   Margin="0,0,6,0"/>
+
+                                            <TextBlock FontSize="14"
+                                                       VerticalAlignment="Center"
+                                                       FontFamily="Corbel" Text="Update"
+                                                       FontWeight="Bold" Foreground="White"
+                                                       Margin="6,0,0,0"/>
+
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+        <!--/LISTVIEW ITEM-->
         
     </Grid>
 </Window>
