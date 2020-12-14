@@ -4,17 +4,30 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 D:\TTCTeam\WeSplit\WeSplit\obj\Debug\
+=======
+E:\WeSplit\WeSplit\obj\Debug\
+>>>>>>> c88c125cace840862ff6ca40fdfe77fe64f1ad95
 WeSplit
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 D:\TTCTeam\WeSplit\WeSplit\App.xaml
 3-1890930732
 
 121319108384
 1647424246
 DetailScreen.xaml;MainWindow.xaml;SplashScreen.xaml;
+=======
+E:\WeSplit\WeSplit\App.xaml
+31494717229
+
+92141191251
+16252260887
+HomeScreenUserControl.xaml;MainWindow.xaml;SplashScreen.xaml;
+>>>>>>> c88c125cace840862ff6ca40fdfe77fe64f1ad95
 
 False
 

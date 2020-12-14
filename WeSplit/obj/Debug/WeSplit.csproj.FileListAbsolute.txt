@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\TTCTeam\WeSplit\WeSplit\bin\Debug\Images\SplashScreen\hochiminh.jpg
 D:\TTCTeam\WeSplit\WeSplit\bin\Debug\Images\SplashScreen\hoian.jpg
 D:\TTCTeam\WeSplit\WeSplit\bin\Debug\Images\SplashScreen\hue.jpg
@@ -37,3 +38,39 @@ D:\TTCTeam\WeSplit\WeSplit\bin\Debug\LiveCharts.xml
 D:\TTCTeam\WeSplit\WeSplit\bin\Debug\LiveCharts.Wpf.pdb
 D:\TTCTeam\WeSplit\WeSplit\bin\Debug\LiveCharts.Wpf.xml
 D:\TTCTeam\WeSplit\WeSplit\obj\Debug\WeSplit.csproj.CopyComplete
+=======
+E:\WeSplit\WeSplit\bin\Debug\Images\SplashScreen\hochiminh.jpg
+E:\WeSplit\WeSplit\bin\Debug\Images\SplashScreen\hoian.jpg
+E:\WeSplit\WeSplit\bin\Debug\Images\SplashScreen\hue.jpg
+E:\WeSplit\WeSplit\bin\Debug\Images\SplashScreen\santori.jpg
+E:\WeSplit\WeSplit\bin\Debug\Images\SplashScreen\singapore.jpg
+E:\WeSplit\WeSplit\bin\Debug\Images\SplashScreen\taybac.jpg
+E:\WeSplit\WeSplit\bin\Debug\Images\SplashScreen\vinhhalong.jpg
+E:\WeSplit\WeSplit\bin\Debug\WeSplit.exe.config
+E:\WeSplit\WeSplit\bin\Debug\WeSplit.exe
+E:\WeSplit\WeSplit\bin\Debug\WeSplit.pdb
+E:\WeSplit\WeSplit\bin\Debug\MaterialDesignColors.dll
+E:\WeSplit\WeSplit\bin\Debug\MaterialDesignThemes.Wpf.dll
+E:\WeSplit\WeSplit\bin\Debug\MaterialDesignColors.pdb
+E:\WeSplit\WeSplit\bin\Debug\MaterialDesignThemes.Wpf.pdb
+E:\WeSplit\WeSplit\bin\Debug\MaterialDesignThemes.Wpf.xml
+E:\WeSplit\WeSplit\obj\Debug\WeSplit.csprojAssemblyReference.cache
+E:\WeSplit\WeSplit\obj\Debug\HomeScreenUserControl.g.cs
+E:\WeSplit\WeSplit\obj\Debug\MainWindow.g.cs
+E:\WeSplit\WeSplit\obj\Debug\SplashScreen.g.cs
+E:\WeSplit\WeSplit\obj\Debug\App.g.cs
+E:\WeSplit\WeSplit\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\WeSplit\WeSplit\obj\Debug\WeSplit_MarkupCompile.cache
+E:\WeSplit\WeSplit\obj\Debug\WeSplit_MarkupCompile.lref
+E:\WeSplit\WeSplit\obj\Debug\App.baml
+E:\WeSplit\WeSplit\obj\Debug\HomeScreenUserControl.baml
+E:\WeSplit\WeSplit\obj\Debug\MainWindow.baml
+E:\WeSplit\WeSplit\obj\Debug\SplashScreen.baml
+E:\WeSplit\WeSplit\obj\Debug\WeSplit.g.resources
+E:\WeSplit\WeSplit\obj\Debug\WeSplit.Properties.Resources.resources
+E:\WeSplit\WeSplit\obj\Debug\WeSplit.csproj.GenerateResource.cache
+E:\WeSplit\WeSplit\obj\Debug\WeSplit.csproj.CoreCompileInputs.cache
+E:\WeSplit\WeSplit\obj\Debug\WeSplit.csproj.CopyComplete
+E:\WeSplit\WeSplit\obj\Debug\WeSplit.exe
+E:\WeSplit\WeSplit\obj\Debug\WeSplit.pdb
+>>>>>>> c88c125cace840862ff6ca40fdfe77fe64f1ad95

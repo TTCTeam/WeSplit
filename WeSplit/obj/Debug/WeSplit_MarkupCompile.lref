@@ -1,6 +1,13 @@
 ﻿
+<<<<<<< HEAD
 
 FD:\TTCTeam\WeSplit\WeSplit\DetailScreen.xaml;;
 FD:\TTCTeam\WeSplit\WeSplit\MainWindow.xaml;;
 FD:\TTCTeam\WeSplit\WeSplit\SplashScreen.xaml;;
+=======
+FE:\WeSplit\WeSplit\App.xaml;;
+FE:\WeSplit\WeSplit\HomeScreenUserControl.xaml;;
+FE:\WeSplit\WeSplit\MainWindow.xaml;;
+FE:\WeSplit\WeSplit\SplashScreen.xaml;;
+>>>>>>> c88c125cace840862ff6ca40fdfe77fe64f1ad95
 

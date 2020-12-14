@@ -26,68 +26,70 @@ namespace WeSplit
             InitializeComponent();
         }
 
-        class Place // DTO = Data transfer object - Entity
-        {
-            public string Name { get; set; }
-            public string Thumbnail { get; set; }
-        }
 
-        // DAO - Data access object
-
-        class PlaceDao
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            public static BindingList<Place> GetAll()
+            var mess = MessageBox.Show("Do you want to exit ?", "Notification", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+            if (mess == MessageBoxResult.Yes)
             {
-                var result = new BindingList<Place>()
-                {
-                    new Place() { Name="Đồng bằng sông Cửu Long", Thumbnail="/Images/PlaceImages/DongBangSongCuuLong.jpg" },
-                    new Place() { Name="Hồ Gươm", Thumbnail="/Images/PlaceImages/HoGuom.jpg" },
-                    new Place() { Name="Nhà hát lớn Hà Nội", Thumbnail="/Images/PlaceImages/NhaHatLonHaNoi.jpg" },
-                    new Place() { Name="Phố cổ Hội An", Thumbnail="/Images/PlaceImages/PhoCoHoiAn.jpg" },
-                    new Place() { Name="Phú Quốc", Thumbnail="/Images/PlaceImages/PhuQuoc.jpg" },
-                    new Place() { Name="Quảng trường Ba Đình", Thumbnail="/Images/PlaceImages/QuangTruongBaDinh.jpg" },
-                    new Place() { Name="Ruộng Bậc Thang", Thumbnail="/Images/PlaceImages/RuongBacThang.jpg" },
-                    new Place() { Name="Vịnh Hạ Long", Thumbnail="/Images/PlaceImages/VinhHaLong.jpg" },
-                };
-
-                return result;
+                Application.Current.Shutdown();
             }
         }
 
-        BindingList<Place> _list = new BindingList<Place>();
-
-        Place selected;
-        List<Place> list;
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Sleep(int v)
         {
-            _list = PlaceDao.GetAll();
-            dataListView.ItemsSource = _list;
+            throw new NotImplementedException();
         }
 
-        private void dataListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            selected = dataListView.SelectedItem as Place;
-
-            MessageBox.Show(selected.Name);
+            DragMove();
         }
 
-        private void DetailButton_Click(object sender, RoutedEventArgs e)
+        private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selected = (sender as Button).DataContext as Place;
+            int index = ListViewMenu.SelectedIndex;
 
-            MessageBox.Show(selected.Name);
+            switch (index)
+            {
+                case 0:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new HomeScreenUserControl());
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
-
+            ButtonCloseMenu.Visibility = Visibility.Visible;
+            ButtonOpenMenu.Visibility = Visibility.Collapsed;
         }
 
-        private void FlagButton_Click(object sender, RoutedEventArgs e)
+        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
-
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
+            ButtonOpenMenu.Visibility = Visibility.Visible;
         }
 
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+                Maximize.Kind = MaterialDesignThemes.Wpf.PackIconKind.WindowMaximize;
+            }
+            else
+            {
+                WindowState = WindowState.Maximized;
+                Maximize.Kind = MaterialDesignThemes.Wpf.PackIconKind.WindowRestore;
+            }
+        }
     }
 }
