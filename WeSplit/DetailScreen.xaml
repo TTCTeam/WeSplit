@@ -1,0 +1,717 @@
+﻿<UserControl x:Class="WeSplit.DetailScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeSplit"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d"  
+             Loaded="UserControl_Loaded"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+
+        <local:AbsoluteConverter x:Key="converter"/>
+        <local:ColorPayConverter x:Key="colorConverter"/>
+
+        <ImageBrush x:Key="updateBtn_mouseOver"
+                    ImageSource="{Binding Update_MouseOver, Converter={StaticResource converter}}"
+                    RenderOptions.BitmapScalingMode="HighQuality"/>
+
+        <ImageBrush x:Key="deleteBtn_mouseOver"
+                    ImageSource="{Binding Delete_MouseOver, Converter={StaticResource converter}}"
+                    RenderOptions.BitmapScalingMode="HighQuality"/>
+
+        <Style x:Key="Update_btn" TargetType="{x:Type Button}">
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Border x:Name="border"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True"/>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource updateBtn_mouseOver}"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+        <Style x:Key="Delete_btn" TargetType="{x:Type Button}">
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Border x:Name="border"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True"/>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource deleteBtn_mouseOver}"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Background="DarkGray">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Column="0">
+
+                <Border CornerRadius="10" 
+                    BorderThickness="1" 
+                    Margin="2"
+                    BorderBrush="Black"
+                    Background="Black">
+
+                    <StackPanel
+                    VerticalAlignment="Center">
+
+                        <TextBlock Text="CHI TIẾT CHUYẾN ĐI" 
+                           FontWeight="Bold"
+                           FontStyle="Italic"
+                           FontSize="18" 
+                           Foreground="White" 
+                           HorizontalAlignment="Center"
+                           />
+
+                    </StackPanel>
+
+                </Border>
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+
+
+                <Border CornerRadius="10" 
+                    BorderThickness="1" 
+                    Margin="2"
+                    BorderBrush="Black"
+                    Background="Black">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+
+                        <TextBlock Text="TRẠNG THÁI"
+                                    FontWeight="Bold"
+                           FontStyle="Italic"
+                           FontSize="18" 
+                           Foreground="White" 
+                           HorizontalAlignment="Center"/>
+                        <Grid >
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" HorizontalAlignment="Center">
+                                <RadioButton Content="Từng đi"
+                                         FontSize="15"
+                                         FontStyle="Italic"
+                                         Foreground="White"
+                                         Margin="0,0,10,0"
+                                         />
+                            </Grid>
+
+                            <Grid Grid.Column="1" HorizontalAlignment="Center">
+                                <RadioButton Content="Đang đi"
+                                         FontSize="15"
+                                         FontStyle="Italic"
+                                         Foreground="White"
+                                         IsChecked="True"/>
+
+
+                            </Grid>
+
+
+                        </Grid>
+
+
+
+
+
+                    </StackPanel>
+
+                </Border>
+
+
+            </Grid>
+
+            <Grid Grid.Column="2">
+
+
+                <Border CornerRadius="10" 
+                    BorderThickness="1" 
+                    Margin="2"
+                    BorderBrush="DarkGoldenrod"
+                    Background="DarkGoldenrod">
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button x:Name="updateBtn"
+                                Width="40"
+                                Height="40"
+                                Margin="0,0,10,0"
+                                BorderThickness="0"
+                                Click="updateBtn_Click"
+                                Style="{StaticResource Update_btn}"
+                                >
+
+                            <Button.Background>
+
+                                <ImageBrush ImageSource="{Binding Update, Converter={StaticResource converter}}"
+                                            RenderOptions.BitmapScalingMode="HighQuality"/>
+                            </Button.Background>
+
+                        </Button>
+
+                        <Button x:Name="deleteBtn"
+                                Width="40"
+                                Height="40"
+                                Margin="10,0,0,0"
+                                BorderThickness="0"
+                                Click="deleteBtn_Click"
+                                Style="{StaticResource Delete_btn}"
+                                >
+
+                            <Button.Background>
+
+                                <ImageBrush ImageSource="{Binding Delete, Converter={StaticResource converter}}"
+                                            RenderOptions.BitmapScalingMode="HighQuality"/>
+                            </Button.Background>
+
+                        </Button>
+
+
+
+
+                    </StackPanel>
+
+                </Border>
+
+
+            </Grid>
+
+
+
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border CornerRadius="10" 
+                    BorderThickness="1" 
+                    Grid.Column="0"
+                    Margin="2"
+                    BorderBrush="DarkGoldenrod"
+                    Background="Black">
+
+                <Grid 
+                 >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" VerticalAlignment="Center">
+                        <TextBlock Text="THÔNG TIN CƠ BẢN"
+                               FontWeight="Bold"
+                           FontStyle="Italic"
+                           FontSize="15" 
+                           Foreground="White" 
+                           HorizontalAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+
+                        <ListView Background="Black"
+                           x:Name="listLocation"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  ScrollViewer.CanContentScroll="True"
+                            >
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate >
+                                    <StackPanel />
+
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+
+                            <ListView.ItemTemplate>
+
+                                <DataTemplate>
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="2*"/>
+
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0" Margin="5,0,0,0">
+                                            <Image Source="{Binding ImageCover}"
+                                                   Width="250"
+                                                   Height="200"/>
+                                        </Grid>
+
+                                        <Grid Grid.Column="1" Margin="15,10,0,0">
+                                            <StackPanel Orientation="Vertical">
+
+                                                <TextBlock x:Name="Ơ"
+                                                   Text="Hà Giang"
+                                                           Foreground="White"
+                                                           FontWeight="Bold"
+                                                   TextWrapping="WrapWithOverflow"
+                                                   />       
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image Source="./Images/DetailScreen/placeholder.png"
+                                                           RenderOptions.BitmapScalingMode="HighQuality"
+                                                           Height="15"
+                                                           Width="15"/>
+                                                    <TextBlock
+                                                        Margin="10,0,0,0"
+                                                        Text="{Binding Path=Place_Name}" 
+                                                       FontSize="15"
+                                                       Foreground="White"/>
+
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+
+                                                    <TextBlock Text="Arrive at: " 
+                                               FontSize="15"
+                                               Foreground="White"/>
+                                                    
+                                                    <TextBlock
+                                       Margin="10,0,0,0"
+                                        Text="{Binding Path=arriveTime}" 
+                                               FontSize="15"
+                                               Foreground="White"/>
+
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+
+                                                    <TextBlock Text="Leave at: " 
+                                               FontSize="15"
+                                               Foreground="White"/>
+
+                                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        Text="{Binding Path=leaveTime}" 
+                                               FontSize="15"
+                                               Foreground="White"/>
+
+                                                </StackPanel>
+                                               
+                                            </StackPanel>
+
+                                        </Grid>
+
+                                    </Grid>
+                                </DataTemplate>
+
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+
+                     
+                       
+
+                    </Grid>
+
+
+                </Grid>
+
+            </Border>
+
+
+            <Border CornerRadius="10" 
+                    BorderThickness="1" 
+                    Grid.Column="1"
+                    Margin="2"
+                    BorderBrush="DarkGoldenrod"
+                    Background="Black">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" VerticalAlignment="Center">
+                        <TextBlock Text="HÌNH ẢNH CHUYẾN ĐI"
+                               FontWeight="Bold"
+                           FontStyle="Italic"
+                           FontSize="15" 
+                           Foreground="White" 
+                           HorizontalAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+
+                        <ListView Background="Black"
+                           x:Name="listImages"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                                  ScrollViewer.CanContentScroll="True"
+                            >
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate >
+                                    <WrapPanel HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+
+                            <ListView.ItemTemplate>
+
+                                <DataTemplate>
+                                    <Image Width="210" Height="150"
+                                           Source="{Binding }"
+                                           RenderOptions.BitmapScalingMode="HighQuality"
+                                           Stretch="UniformToFill"/>
+                                </DataTemplate>
+
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+
+                    </Grid>
+
+                </Grid>
+            </Border>
+
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <Border CornerRadius="10" 
+                    BorderThickness="1" 
+                    Grid.Column="0"
+                    Margin="2"
+                    BorderBrush="Black"
+                    Background="Gray">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="BIỂU ĐỒ CHI GIÁ"
+                               FontWeight="Bold"
+                           FontStyle="Italic"
+                           FontSize="15" 
+                           Foreground="White" 
+                           HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+
+                        <lvc:PieChart LegendLocation="Bottom" DataClick="pieChartExpenditure_DataClick" 
+                                      x:Name="pieChartExpenditure"
+                      Hoverable="True" DataTooltip="{x:Null}" Series="{Binding PieSeries}">
+                          
+                        </lvc:PieChart>
+
+
+                    </Grid>
+                </Grid>
+
+            </Border>
+
+            <Border CornerRadius="10" 
+                    BorderThickness="1" 
+                    Grid.Column="1"
+                    Margin="3,0,1,4"
+                    BorderBrush="Black"
+                    Background="Gray">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="BIỂU ĐỒ KHOẢN CHI"
+                               FontWeight="Bold"
+                           FontStyle="Italic"
+                           FontSize="15" 
+                           Foreground="White" 
+                           HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+
+                        <lvc:CartesianChart Series="{Binding SeriesCollection}"
+                                                LegendLocation="Bottom">
+                            <!--<lvc:CartesianChart.AxisX>
+
+                                <lvc:Axis Title="Month" Labels="{Binding Labels}"/>
+
+                            </lvc:CartesianChart.AxisX>-->
+                        </lvc:CartesianChart>
+
+                    </Grid>
+                </Grid>
+
+            </Border>
+
+            <Border CornerRadius="10" 
+                    BorderThickness="1" 
+                    Grid.Column="2"
+                    Margin="2"
+                    BorderBrush="Black"
+                    Background="Black">
+                <Grid>
+
+                    <StackPanel Orientation="Vertical">
+
+                        <TextBlock Text="TỔNG KẾT CHUYẾN ĐI"
+                               FontWeight="Bold"
+                           FontStyle="Italic"
+                           FontSize="15" 
+                           Foreground="White" 
+                           HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+
+                        <Border CornerRadius="10" 
+                    BorderThickness="1" 
+                    Padding="5"
+                    Margin="2"
+                    BorderBrush="Black"
+                    Background="Gray">
+
+
+
+                            <Grid>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0">
+
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <TextBlock Text="Tổng: "
+                                                      
+                                                       FontSize="12"
+                                                       />
+                                            <TextBlock  
+                                                Margin="5,0,0,0"
+                                                x:Name="sum"
+                                                        Text="4,45 Triệu"
+                                                        FontSize="12"
+                                                        Foreground="White"
+                                                        FontWeight="Bold"/>
+                                        </StackPanel>
+
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <TextBlock Height="20"
+                                                       Width="5"
+                                                       Background="LightGreen"/>
+                                            <TextBlock Text="Nhận lại"
+                                                           Margin="5,0,0,0"
+                                                      VerticalAlignment="Center"
+                                                       FontSize="10"
+                                                       />
+
+                                        </StackPanel>
+                                    </Grid>
+
+                                </Grid>
+
+                                <Grid Grid.Row="1" Margin="0,2,0,0">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0">
+
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <TextBlock Text="Trung bình: "
+                                                      
+                                                       FontSize="12"
+                                                       />
+                                            <TextBlock  
+                                                Margin="5,0,0,0"
+                                                
+                                                        Text="1,48 Triệu"
+                                                        FontSize="12"
+                                                        Foreground="White"
+                                                        FontWeight="Bold"/>
+                                        </StackPanel>
+
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <TextBlock Height="20"
+                                                       Width="5"
+                                                       Background="Red"/>
+                                            <TextBlock Text="Trả thêm"
+                                                           Margin="5,0,0,0"
+                                                      VerticalAlignment="Center"
+                                                       FontSize="10"
+                                                       />
+
+                                        </StackPanel>
+                                    </Grid>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </Border>
+
+                        <ListView Background="Black"
+                           x:Name="listMem" BorderThickness="0"                             
+                                  Margin="5,5,5,5"
+                            >
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate >
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+
+                            <ListView.ItemTemplate>
+
+                                <DataTemplate>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0"
+                                           
+                                            Text="{Binding Name_Mem}"
+                                                   FontSize="15"
+                                                   Foreground="White"/>
+
+                                        <WrapPanel Grid.Column="1">
+                                            <TextBlock 
+                                           HorizontalAlignment="Right"
+                                            Text="{Binding Pay}" 
+                                                 FontSize="15" 
+                                               Foreground="{Binding Pay, Converter={StaticResource colorConverter}}"/>
+                                            <TextBlock Text="Nghìn"  Foreground="{Binding Pay, Converter={StaticResource colorConverter}}"
+                                                   FontSize="15"/>
+                                        </WrapPanel>
+
+                                    </Grid>
+                                </DataTemplate>
+
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+
+
+                    </StackPanel>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+</UserControl>
