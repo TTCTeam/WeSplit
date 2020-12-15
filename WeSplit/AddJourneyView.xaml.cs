@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TestUserControl
+namespace WeSplit
 {
     /// <summary>
     /// Interaction logic for View1.xaml
