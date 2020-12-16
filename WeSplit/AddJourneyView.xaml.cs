@@ -185,5 +185,16 @@ namespace WeSplit
             }
         }
 
+        private void showRouteToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            imagesListView.Visibility = Visibility.Collapsed;
+            routeDataGrid.Visibility = Visibility.Visible;
+        }
+
+        private void showRouteToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            imagesListView.Visibility = Visibility.Visible;
+            routeDataGrid.Visibility = Visibility.Collapsed;
+        }
     }
 }

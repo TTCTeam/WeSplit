@@ -56,6 +56,10 @@ namespace WeSplit
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new HomeScreenUserControl());
                     break;
+                case 1:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new AddJourneyView());
+                    break;
                 default:
                     break;
             }

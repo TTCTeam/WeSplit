@@ -2,14 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:WeSplit"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1300"
+             d:DesignHeight="700" d:DesignWidth="1200"
              Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">15</sys:Double>
+        <!--<sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">15</sys:Double>-->
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
         <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
@@ -420,100 +420,125 @@
             </Setter>
         </Style>
     </UserControl.Resources>
+    <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:1}">
+        <Grid Margin="20,0,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="8*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3.1*"></ColumnDefinition>
-            <ColumnDefinition Width="7*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Label Content="Tên chuyến đi" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                <TextBox Name="nameJourney" Height="35" Width="220" Style="{DynamicResource TextBoxStyle}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Label Content="Địa điểm" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                <TextBox Name="location" Height="35" Width="220" Style="{DynamicResource TextBoxStyle}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Label Content="Trạng thái" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                <ComboBox Name="statusComboBox" Height="35" Width="220" Margin="2" SelectedIndex="0" Style="{DynamicResource ComboBoxStyle}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Background="DarkSlateGray" Margin="5,5,5,0">
-                <Label Content="Hình ảnh" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                <Button Name="addImageButton" Height="30" Width="35" Margin="245,0,0,0" Click="addImageButton_Click" Style="{DynamicResource ButtonStyle3}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="Images/add-image.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
-                    </Button.Background>
-                </Button>
-            </StackPanel>
-            <ListView Name="imagesListView" Tag="{Binding}" Background="DarkSlateGray" Height="220" BorderThickness="0" Margin="5,0,5,5" Padding="3,0,3,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AllowDrop="True" Drop="imagesListView_Drop" DragOver="imagesListView_DragOver">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Height="100" Width="110" Margin="0,2,0,2">
-                            <StackPanel.Background>
-                                <ImageBrush ImageSource="{Binding ImagePath}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
-                            </StackPanel.Background>
-                            <Button Name="removeImageButton" Height="20" Width="20" HorizontalAlignment="Right" Click="removeImageButton_Click" Style="{DynamicResource ButtonStyleRemove}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <StackPanel Orientation="Vertical" Margin="5">
-                <Label Content="Lộ trình" Style="{DynamicResource LabelStyle1}"/>
-                <DataGrid Name="routeDataGrid" Height="158" AutoGenerateColumns="False" Loaded="routeDataGrid_Loaded">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="Auto" Binding="{Binding StopPoint}" Header="Điểm dừng chân"/>
-                        <DataGridTextColumn Width="*" Binding="{Binding ArrivalTime}" Header="Thời gian đến"/>
-                        <DataGridTextColumn Width="*" Binding="{Binding LeavingTime}" Header="Thời gian đi"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </StackPanel>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-        </StackPanel>
-        <Grid Grid.Column="1">
-            <DockPanel>
-                <ListView DockPanel.Dock="Top" Name="memberListView" Background="Transparent" Height="605" ScrollViewer.CanContentScroll="False">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="Tên thành viên:" VerticalAlignment="Center" Margin="5" Style="{DynamicResource LabelStyle1}"/>
-                                    <TextBox Text="{Binding Name}" Height="35" Width="200" Style="{DynamicResource TextBoxStyle}"/>
-                                    <ListView Tag="{Binding ID}" ItemsSource="{Binding PayingList}" MinWidth="542.5" LostFocus="ListView_LostFocus">
-                                        <ListView.Template>
-                                            <ControlTemplate>
-                                                <ItemsPresenter/>
-                                            </ControlTemplate>
-                                        </ListView.Template>
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Tag="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},
-                                                    Path=Tag}" Orientation="Horizontal" Background="Transparent">
-                                                    <Label Content="Khoảng chi:" Margin="5" VerticalAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                                                    <TextBox Text="{Binding PayingFor}" Height="35" Width="200" Style="{DynamicResource TextBoxStyle}"/>
-                                                    <Label Content="Chi phí:" Margin="5" VerticalAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                                                    <TextBox Text="{Binding Cost}" Height="35" Width="120" Style="{DynamicResource TextBoxStyle}"/>
-                                                    <Button Name="removePayingButton" Height="35" Width="35" VerticalAlignment="Center" Click="removePayingButton_Click" Style="{DynamicResource ButtonStyleRemove}"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
+                <Label Grid.Column="0" FontWeight="Bold" FontStyle="Italic" FontSize="30" Margin="0,20,0,0" Content="THÊM CHUYẾN ĐI"  Foreground="Gold"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="7*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="5,1,5,1">
+                        <Label Content="Tên chuyến đi" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
+                        <TextBox Name="nameJourney" Height="35" Width="220" Style="{DynamicResource TextBoxStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,1,5,1">
+                        <Label Content="Địa điểm" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
+                        <TextBox Name="destination" Height="35" Width="220" Style="{DynamicResource TextBoxStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,1,5,1">
+                        <Label Content="Ngày đi" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
+                        <TextBox Name="departureDate" Height="35" Width="220" Style="{DynamicResource TextBoxStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,1,5,1">
+                        <Label Content="Ngày về" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
+                        <TextBox Name="returnDate" Height="35" Width="220" Style="{DynamicResource TextBoxStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,1,5,1">
+                        <Label Content="Trạng thái" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
+                        <ComboBox Name="statusComboBox" Height="35" Width="220" Margin="2" SelectedIndex="0" Style="{DynamicResource ComboBoxStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Background="DarkSlateGray" Margin="5,5,5,0">
+                        <Label Content="Hình ảnh" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
+                        <Button Name="addImageButton" Height="30" Width="35" Margin="205,0,0,0" Click="addImageButton_Click" Style="{DynamicResource ButtonStyle3}">
+                            <Button.Background>
+                                <ImageBrush ImageSource="Images/add-image.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                    <ListView Name="imagesListView" Tag="{Binding}" Background="DarkSlateGray" Height="270" BorderThickness="0" Margin="5,0,5,5" Padding="3,0,3,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AllowDrop="True" Drop="imagesListView_Drop" DragOver="imagesListView_DragOver">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Height="90" Width="100" Margin="-4">
+                                    <StackPanel.Background>
+                                        <ImageBrush ImageSource="{Binding ImagePath}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </StackPanel.Background>
+                                    <Button Name="removeImageButton" Height="20" Width="20" HorizontalAlignment="Right" Click="removeImageButton_Click" Style="{DynamicResource ButtonStyleRemove}"/>
                                 </StackPanel>
-                                <Button Name="addPayingButton" Content="Thêm khoảng chi" Tag="{Binding}" Height="40" Width="140" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle2}" Click="addPayingButton_Click"/>
-                            </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <StackPanel Orientation="Horizontal" Margin="5,1,5,1">
+                        <Label Content="Lộ trình" Style="{DynamicResource LabelStyle1}"/>
+                        <ToggleButton Name="showRouteToggleButton" Checked="showRouteToggleButton_Checked" Unchecked="showRouteToggleButton_Unchecked"></ToggleButton>
+                    </StackPanel>
+                    <materialDesign:TransitioningContent Name="showRouteDataGridEffect" OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:1}">
 
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <Button Name="addMemberButton" Content="Thêm thành viên" Height="35" Width="160" DockPanel.Dock="Bottom" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle1}" Click="addMemberButton_Click"/>
-            </DockPanel>
+                        <DataGrid Name="routeDataGrid" Height="260" FontSize="12" Visibility="Collapsed" AutoGenerateColumns="False"  Loaded="routeDataGrid_Loaded">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding StopPoint}" Header="Điểm dừng chân"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding ArrivalTime}" Header="Thời gian đến"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding LeavingTime}" Header="Thời gian đi"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </materialDesign:TransitioningContent>
+                </StackPanel>
+                <Grid Grid.Column="1">
+                    <DockPanel>
+                        <ListView DockPanel.Dock="Top" Name="memberListView" Background="Transparent" Height="545" ScrollViewer.CanContentScroll="False">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Tên thành viên:" VerticalAlignment="Center" Margin="5" Style="{DynamicResource LabelStyle1}"/>
+                                            <TextBox Text="{Binding Name}" Height="35" Width="190" Style="{DynamicResource TextBoxStyle}"/>
+                                            <ListView Tag="{Binding ID}" ItemsSource="{Binding PayingList}" MinWidth="485" LostFocus="ListView_LostFocus">
+                                                <ListView.Template>
+                                                    <ControlTemplate>
+                                                        <ItemsPresenter/>
+                                                    </ControlTemplate>
+                                                </ListView.Template>
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Tag="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=Tag}" Orientation="Horizontal" Background="Transparent" Margin="0,-5,0,-5">
+                                                            <Label Content="Khoảng chi:" Margin="5" VerticalAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
+                                                            <TextBox Text="{Binding PayingFor}" Height="35" Width="160" Style="{DynamicResource TextBoxStyle}"/>
+                                                            <Label Content="Chi phí:" Margin="5" VerticalAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
+                                                            <TextBox Text="{Binding Cost}" Height="35" Width="100" Style="{DynamicResource TextBoxStyle}"/>
+                                                            <Button Name="removePayingButton" Height="35" Width="35" VerticalAlignment="Center" Click="removePayingButton_Click" Style="{DynamicResource ButtonStyleRemove}"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+                                        </StackPanel>
+                                        <Button Name="addPayingButton" Content="Thêm khoảng chi" Tag="{Binding}" Height="40" Width="140" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle2}" Click="addPayingButton_Click"/>
+                                    </StackPanel>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <Button Name="addMemberButton" Content="Thêm thành viên" Height="35" Width="160" DockPanel.Dock="Bottom" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle1}" Click="addMemberButton_Click"/>
+                    </DockPanel>
+                </Grid>
+            </Grid>
         </Grid>
-
-    </Grid>
+    </materialDesign:TransitioningContent>
 </UserControl>
