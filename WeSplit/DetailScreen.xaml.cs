@@ -80,78 +80,78 @@ namespace WeSplit
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            DetailUi detail = new DetailUi();
+            //DetailUi detail = new DetailUi();
 
-            BindingList<Place> Places = new BindingList<Place>() {
-            new Place("Vinh Ha Long",new DateTime(), new DateTime(),"./Images/PlaceImages/VinhHaLong.jpg"),
-            new Place("Ho Guom",new DateTime(), new DateTime(),"./Images/PlaceImages/HoGuom.jpg"),
-            new Place("Nha Hat Lon Ha Noi",new DateTime(), new DateTime(),"./Images/PlaceImages/NhaHatLonHaNoi.jpg"),
-            new Place("Pho Co Hoi An",new DateTime(), new DateTime(),"./Images/PlaceImages/PhoCoHoiAn.jpg"),
-            new Place("Phu Quoc",new DateTime(), new DateTime(),"./Images/PlaceImages/PhuQuoc.jpg"),
-            new Place("Ruong Bac Thang",new DateTime(), new DateTime(),"./Images/PlaceImages/RuongBacThang.jpg")
-            };
+            //BindingList<Place> Places = new BindingList<Place>() {
+            //new Place("Vinh Ha Long",new DateTime(), new DateTime(),"./Images/PlaceImages/VinhHaLong.jpg"),
+            //new Place("Ho Guom",new DateTime(), new DateTime(),"./Images/PlaceImages/HoGuom.jpg"),
+            //new Place("Nha Hat Lon Ha Noi",new DateTime(), new DateTime(),"./Images/PlaceImages/NhaHatLonHaNoi.jpg"),
+            //new Place("Pho Co Hoi An",new DateTime(), new DateTime(),"./Images/PlaceImages/PhoCoHoiAn.jpg"),
+            //new Place("Phu Quoc",new DateTime(), new DateTime(),"./Images/PlaceImages/PhuQuoc.jpg"),
+            //new Place("Ruong Bac Thang",new DateTime(), new DateTime(),"./Images/PlaceImages/RuongBacThang.jpg")
+            //};
 
-            listLocation.ItemsSource = Places;
+            //listLocation.ItemsSource = Places;
 
-            detail.Labels = new[] { "Jan", "Feb", "Mar", "Apr" };
+            //detail.Labels = new[] { "Jan", "Feb", "Mar", "Apr" };
           
 
-            listImage.Add("./Images/PlaceImages/HoGuom.jpg");
-            listImage.Add("./Images/PlaceImages/NhaHatLonHaNoi.jpg");
-            listImage.Add("./Images/PlaceImages/PhuQuoc.jpg");
-            listImage.Add("./Images/PlaceImages/QuangTruongBaDinh.jpg");
-            listImage.Add("./Images/PlaceImages/RuongbacThang.jpg");
-            listImage.Add("./Images/PlaceImages/VinhHaLong.jpg");
-            listImage.Add("./Images/PlaceImages/DongBangSongCuuLong.jpg");
-            listImage.Add("./Images/PlaceImages/HoGuom.jpg");
-            listImage.Add("./Images/PlaceImages/HoGuom.jpg");
-            listImage.Add("./Images/PlaceImages/HoGuom.jpg");
-            listImage.Add("./Images/PlaceImages/HoGuom.jpg");
+            //listImage.Add("./Images/PlaceImages/HoGuom.jpg");
+            //listImage.Add("./Images/PlaceImages/NhaHatLonHaNoi.jpg");
+            //listImage.Add("./Images/PlaceImages/PhuQuoc.jpg");
+            //listImage.Add("./Images/PlaceImages/QuangTruongBaDinh.jpg");
+            //listImage.Add("./Images/PlaceImages/RuongbacThang.jpg");
+            //listImage.Add("./Images/PlaceImages/VinhHaLong.jpg");
+            //listImage.Add("./Images/PlaceImages/DongBangSongCuuLong.jpg");
+            //listImage.Add("./Images/PlaceImages/HoGuom.jpg");
+            //listImage.Add("./Images/PlaceImages/HoGuom.jpg");
+            //listImage.Add("./Images/PlaceImages/HoGuom.jpg");
+            //listImage.Add("./Images/PlaceImages/HoGuom.jpg");
 
-            listImages.ItemsSource = listImage;
+            //listImages.ItemsSource = listImage;
 
-            listMember.Add(new Member("Khắc Tây", 316.67));
-            listMember.Add(new Member("Túc Hạo", 317.67));
-            listMember.Add(new Member("Tử Tửu", -316.67));
-            listMember.Add(new Member("Minh Tuệ", -416.67));
-            listMember.Add(new Member("Khắc Luân", 306.67));
+            //listMember.Add(new Member("Khắc Tây", 316.67));
+            //listMember.Add(new Member("Túc Hạo", 317.67));
+            //listMember.Add(new Member("Tử Tửu", -316.67));
+            //listMember.Add(new Member("Minh Tuệ", -416.67));
+            //listMember.Add(new Member("Khắc Luân", 306.67));
 
-            listMem.ItemsSource = listMember;
+            //listMem.ItemsSource = listMember;
 
             
-            detail.PieSeries = new SeriesCollection();
-            for(int i = 0; i < listMember.Count(); i++)
-            {
-                List<double> values = new List<double> { (listMember.ElementAt(i).Pay<0)?(listMember.ElementAt(i).Pay*(-1)): listMember.ElementAt(i).Pay };
-                ChartValues<double> _ys = new ChartValues<double>(values);
-                detail.PieSeries.Add(
-                    new PieSeries()
-                    {
-                        Values = _ys,
-                        Title = listMember.ElementAt(i).Name_Mem,
-                        DataLabels = true
-                    }
-                    ) ;
-            }
+            //detail.PieSeries = new SeriesCollection();
+            //for(int i = 0; i < listMember.Count(); i++)
+            //{
+            //    List<double> values = new List<double> { (listMember.ElementAt(i).Pay<0)?(listMember.ElementAt(i).Pay*(-1)): listMember.ElementAt(i).Pay };
+            //    ChartValues<double> _ys = new ChartValues<double>(values);
+            //    detail.PieSeries.Add(
+            //        new PieSeries()
+            //        {
+            //            Values = _ys,
+            //            Title = listMember.ElementAt(i).Name_Mem,
+            //            DataLabels = true
+            //        }
+            //        ) ;
+            //}
 
-            detail.SeriesCollection = new SeriesCollection();
+            //detail.SeriesCollection = new SeriesCollection();
 
-            for (int i = 0; i < listMember.Count(); i++)
-            {
-                List<double> values = new List<double> { (listMember.ElementAt(i).Pay < 0) ? (listMember.ElementAt(i).Pay * (-1)) : listMember.ElementAt(i).Pay };
-                ChartValues<double> _ys = new ChartValues<double>(values);
-                detail.SeriesCollection.Add(
-                    new ColumnSeries()
-                    {
-                        Values = _ys,
-                        Title = listMember.ElementAt(i).Name_Mem,
-                        DataLabels = true
-                    }
-                    );
-            }
+            //for (int i = 0; i < listMember.Count(); i++)
+            //{
+            //    List<double> values = new List<double> { (listMember.ElementAt(i).Pay < 0) ? (listMember.ElementAt(i).Pay * (-1)) : listMember.ElementAt(i).Pay };
+            //    ChartValues<double> _ys = new ChartValues<double>(values);
+            //    detail.SeriesCollection.Add(
+            //        new ColumnSeries()
+            //        {
+            //            Values = _ys,
+            //            Title = listMember.ElementAt(i).Name_Mem,
+            //            DataLabels = true
+            //        }
+            //        );
+            //}
 
 
-            DataContext = detail;
+            //DataContext = detail;
         }
 
         private void pieChartExpenditure_DataClick(object sender, LiveCharts.ChartPoint chartPoint)

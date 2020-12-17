@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="27d997bb6fca4efeba0711d7e3d4f5a3" Name="Diagram1">
+        <EntityTypeShape EntityType="WeSplitModel.Image" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeSplitModel.Member" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeSplitModel.Payment" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeSplitModel.StatusDescription" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeSplitModel.Trip" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WeSplitModel.Waypoint" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="WeSplitModel.FK_Image_Trip" ManuallyRouted="false" />
+        <AssociationConnector Association="WeSplitModel.FK_Member_Trip" ManuallyRouted="false" />
+        <AssociationConnector Association="WeSplitModel.FK_Payment_Member" ManuallyRouted="false" />
+        <AssociationConnector Association="WeSplitModel.FK_Trip_StatusDescription" ManuallyRouted="false" />
+        <AssociationConnector Association="WeSplitModel.FK_Waypoint_Trip" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

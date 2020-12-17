@@ -13,11 +13,6 @@ namespace WeSplit
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string relative = (string)value;
-            if (relative[0] == '@')
-            {
-                relative = relative.Remove(0, 1);
-                return relative;
-            }
             var folder = AppDomain.CurrentDomain.BaseDirectory;
             var absolute = $"{folder}{relative}";
             return absolute;

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/avt.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/remove.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("databasemodel.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("databasemodel.tt")]
 
 

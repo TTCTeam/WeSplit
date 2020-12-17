@@ -19,36 +19,18 @@ using System.Windows.Shapes;
 namespace WeSplit
 {
     /// <summary>
-    /// Interaction logic for View1.xaml
+    /// Interaction logic for AddJourneyView.xaml
     /// </summary>
     public partial class AddJourneyView : UserControl
     {
 
-        BindingList<Member> members;
-        BindingList<Image> images;
+        private Trip Trip { get; set; }
+        private WeSplitEntities DB { get; set; }
+
         public AddJourneyView()
         {
             InitializeComponent();
             
-            
-        }
-
-        class Image
-        {
-            public String ImagePath { get; set; }
-        }
-
-        class Paying
-        {
-            public String PayingFor { get; set; }
-            public int Cost { get; set; }
-        }
-
-        class Member
-        {
-            public int ID { get; set; }
-            public String Name { get; set; }
-            public BindingList<Paying> PayingList { get; set; }
         }
 
         private void ListView_LostFocus(object sender, RoutedEventArgs e)
@@ -56,16 +38,16 @@ namespace WeSplit
             (sender as ListView).SelectedIndex = -1;
         }
 
-        private void addPayingButton_Click(object sender, RoutedEventArgs e)
+        private void addPaymentButton_Click(object sender, RoutedEventArgs e)
         {
-            Member member = (Member)(sender as Button).Tag;
-            member.PayingList.Add(new Paying());
+            Member member = (Member)(((sender as Button).Parent) as StackPanel).DataContext;
+            member.Payments.Add(new Payment());
             
         }
 
         private void addMemberButton_Click(object sender, RoutedEventArgs e)
         {
-            members.Add(new Member { ID = members.Count, Name = "", PayingList = new BindingList<Paying>() });
+            Trip.Members.Add(new Member { Payments = new BindingList<Payment>() });
         }
 
         private void removeImageButton_Click(object sender, RoutedEventArgs e)
@@ -77,59 +59,37 @@ namespace WeSplit
 
         private void removePayingButton_Click(object sender, RoutedEventArgs e)
         {
-            int memberID =(int) ((sender as Button).Parent as StackPanel).Tag;
-            Paying thisPaying = (Paying)(sender as Button).DataContext;
-            members[memberID].PayingList.Remove(thisPaying);
+            Member member = (Member)(((sender as Button).Parent) as StackPanel).Tag;
+            Payment thisPayment = (Payment)(sender as Button).DataContext;
+            member.Payments.Remove(thisPayment);
         }
 
-        
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            images = new BindingList<Image> { new Image { ImagePath = "Images/avt.jpg" }, new Image { ImagePath = "Images/avt.jpg" }, new Image { ImagePath = "Images/avt.jpg" }, new Image { ImagePath = "Images/avt.jpg" }, new Image { ImagePath = "Images/avt.jpg" }, new Image { ImagePath = "Images/avt.jpg" }, new Image { ImagePath = "Images/avt.jpg" }, new Image { ImagePath = "Images/avt.jpg" }, new Image { ImagePath = "Images/avt.jpg" }, new Image { ImagePath = "Images/avt.jpg" } };
-            imagesListView.ItemsSource = images;
+         
+            DB = new WeSplitEntities();
+            var statusDescriptions = DB.StatusDescriptions.Select((s)=>s.Description).ToList();
+            statusComboBox.ItemsSource = statusDescriptions;
 
-            List<Paying> payings = new List<Paying> { new Paying { PayingFor = "Kem Đánh Răng", Cost = 20000 }, new Paying { PayingFor = "Kem Đánh Răng", Cost = 20000 }, new Paying { PayingFor = "Kem Đánh Răng", Cost = 20000 }, new Paying { PayingFor = "Kem Đánh Răng", Cost = 20000 } };
-            List<Paying> payings1 = new List<Paying> { new Paying { PayingFor = "Kem Đánh Răng", Cost = 20000 }, new Paying { PayingFor = "Kem Đánh Răng", Cost = 20000 }, new Paying { PayingFor = "Kem Đánh Răng", Cost = 20000 }, new Paying { PayingFor = "Kem Đánh Răng", Cost = 20000 } };
-            members = new BindingList<Member> { new Member { ID = 0, Name = "Đoàn Minh Tân", PayingList = new BindingList<Paying>(payings) }, new Member { ID = 1, Name = "dmt", PayingList = new BindingList<Paying>(payings1) } };
-            memberListView.ItemsSource = members;
-            string[] status = new string[] { "Đang đi", "Đã đi", "Đã thanh toán", "Đã đi", "Đã thanh toán", "Đã đi", "Đã thanh toán", "Đã đi", "Đã thanh toán" };
-            statusComboBox.ItemsSource = status;
-           
+            
+            Trip = new Trip { Status = 0, Members = new BindingList<Member>(), Images = new BindingList<Image>(), Waypoints = new BindingList<Waypoint>() };
+            this.DataContext = Trip;
         }
 
-        private void routeDataGrid_Loaded(object sender, RoutedEventArgs e)
-        {
-            DataTable route = new DataTable();
-            route.Columns.Add("StopPoint");
-            route.Columns.Add("ArrivalTime");
-            route.Columns.Add("LeavingTime");
-            route.Rows.Add(new object[] { "Vĩnh Kim", "12/12/2020", "13/12/2020" });
-            route.Rows.Add(new object[] { "Vĩnh Kim", "12/12/2020", "13/12/2020" });
-            route.Rows.Add(new object[] { "Vĩnh Kim", "12/12/2020", "13/12/2020" });
-            route.Rows.Add(new object[] { "Vĩnh Kim", "12/12/2020", "13/12/2020" });
-            route.Rows.Add(new object[] { "Vĩnh Kim", "12/12/2020", "13/12/2020" });
-            route.Rows.Add(new object[] { "Vĩnh Kim", "12/12/2020", "13/12/2020" });
-            route.Rows.Add(new object[] { "Vĩnh Kim", "12/12/2020", "13/12/2020" });
-            route.Rows.Add(new object[] { "Vĩnh Kim", "12/12/2020", "13/12/2020" });
-            route.Rows.Add(new object[] { "Vĩnh Kim", "12/12/2020", "13/12/2020" });
-            route.Rows.Add(new object[] { "Vĩnh Kim", "12/12/2020", "13/12/2020" });
-            route.Rows.Add(new object[] { "Vĩnh Kim", "12/12/2020", "13/12/2020" });
-            route.Rows.Add(new object[] { "Vĩnh Kim", "12/12/2020", "13/12/2020" });
-            routeDataGrid.ItemsSource = route.DefaultView;
-        }
 
         private void imagesListView_Drop(object sender, DragEventArgs e)
         {
             string[] filePaths = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
-            if (images == null)
+            if (Trip.Images == null)
             {
-                images = new BindingList<Image>();
+                Trip.Images = new BindingList<Image>();
             }
 
             foreach (var filePath in filePaths)
             {
-                images.Add(new Image { ImagePath = filePath });
+                Trip.Images.Add(new Image { ImagePath = filePath });
             }
         }
 
@@ -172,14 +132,14 @@ namespace WeSplit
             if (openFileDialog.ShowDialog() == true)
             {
                 var files = openFileDialog.FileNames;
-                if (images == null)
+                if (Trip.Images == null)
                 {
-                    images = new BindingList<Image>();
+                    Trip.Images = new BindingList<Image>();
                 }
 
                 foreach (var file in files)
                 {
-                    images.Add(new Image { ImagePath = file });
+                    Trip.Images.Add(new Image { ImagePath = file });
                 }
 
             }
@@ -195,6 +155,20 @@ namespace WeSplit
         {
             imagesListView.Visibility = Visibility.Visible;
             routeDataGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+            //save Images
+
+
+            DB.Trips.Add(Trip);
+            DB.SaveChanges();
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            //return to homescreen
         }
     }
 }

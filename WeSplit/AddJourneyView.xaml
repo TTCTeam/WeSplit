@@ -434,6 +434,20 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Column="0" FontWeight="Bold" FontStyle="Italic" FontSize="30" Margin="0,20,0,0" Content="THÊM CHUYẾN ĐI"  Foreground="Gold"/>
+                <Grid Grid.Column="1">
+                    <StackPanel Margin="20,0,20,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="saveButton" Height="40" Width="40" Margin="5" Click="saveButton_Click">
+                            <Button.Background>
+                                <ImageBrush ImageSource="Images/save_icon.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                            </Button.Background>
+                        </Button>
+                        <Button Name="cancelButton" Height="40" Width="40" Margin="20,5,5,5" Click="cancelButton_Click">
+                            <Button.Background>
+                                <ImageBrush ImageSource="Images/prohibition.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                </Grid>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -443,23 +457,23 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal" Margin="5,1,5,1">
                         <Label Content="Tên chuyến đi" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                        <TextBox Name="nameJourney" Height="35" Width="220" Style="{DynamicResource TextBoxStyle}"/>
+                        <TextBox Name="nameJourney" Height="35" Width="220" Text="{Binding Name}" Style="{DynamicResource TextBoxStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5,1,5,1">
                         <Label Content="Địa điểm" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                        <TextBox Name="destination" Height="35" Width="220" Style="{DynamicResource TextBoxStyle}"/>
+                        <TextBox Name="destination" Height="35" Width="220" Text="{Binding Destination}"  Style="{DynamicResource TextBoxStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5,1,5,1">
                         <Label Content="Ngày đi" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                        <TextBox Name="departureDate" Height="35" Width="220" Style="{DynamicResource TextBoxStyle}"/>
+                        <TextBox Name="departureDate" Height="35" Width="220" Text="{Binding DepartureDate, StringFormat={}{0:dd/MM/yyyy}, ConverterCulture=vi-VI}" Style="{DynamicResource TextBoxStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5,1,5,1">
                         <Label Content="Ngày về" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                        <TextBox Name="returnDate" Height="35" Width="220" Style="{DynamicResource TextBoxStyle}"/>
+                        <TextBox Name="returnDate" Height="35" Width="220" Text="{Binding ReturnDate, StringFormat={}{0:dd/MM/yyyy}, ConverterCulture=vi-VI}" Style="{DynamicResource TextBoxStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5,1,5,1">
                         <Label Content="Trạng thái" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                        <ComboBox Name="statusComboBox" Height="35" Width="220" Margin="2" SelectedIndex="0" Style="{DynamicResource ComboBoxStyle}"/>
+                        <ComboBox Name="statusComboBox" Height="35" Width="220" Margin="2" SelectedIndex="{Binding Status, TargetNullValue=0}" Style="{DynamicResource ComboBoxStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Background="DarkSlateGray" Margin="5,5,5,0">
                         <Label Content="Hình ảnh" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
@@ -469,7 +483,7 @@
                             </Button.Background>
                         </Button>
                     </StackPanel>
-                    <ListView Name="imagesListView" Tag="{Binding}" Background="DarkSlateGray" Height="270" BorderThickness="0" Margin="5,0,5,5" Padding="3,0,3,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AllowDrop="True" Drop="imagesListView_Drop" DragOver="imagesListView_DragOver">
+                    <ListView Name="imagesListView" ItemsSource="{Binding Images}" Tag="{Binding}" Background="DarkSlateGray" Height="270" BorderThickness="0" Margin="5,0,5,5" Padding="3,0,3,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AllowDrop="True" Drop="imagesListView_Drop" DragOver="imagesListView_DragOver">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel/>
@@ -492,25 +506,25 @@
                     </StackPanel>
                     <materialDesign:TransitioningContent Name="showRouteDataGridEffect" OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:1}">
 
-                        <DataGrid Name="routeDataGrid" Height="260" FontSize="12" Visibility="Collapsed" AutoGenerateColumns="False"  Loaded="routeDataGrid_Loaded">
+                        <DataGrid Name="routeDataGrid" ItemsSource="{Binding Waypoints}" Height="260" FontSize="12" Visibility="Collapsed" AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="Auto" Binding="{Binding StopPoint}" Header="Điểm dừng chân"/>
-                                <DataGridTextColumn Width="*" Binding="{Binding ArrivalTime}" Header="Thời gian đến"/>
-                                <DataGridTextColumn Width="*" Binding="{Binding LeavingTime}" Header="Thời gian đi"/>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding Location}" Header="Điểm dừng chân"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding ArrivalTime, StringFormat={}{0:HH:mm dd/MM}, ConverterCulture=vi-VI}" Header="Thời gian đến"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding LeavingTime, StringFormat={}{0:HH:mm dd/MM}, ConverterCulture=vi-VI}" Header="Thời gian đi"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </materialDesign:TransitioningContent>
                 </StackPanel>
                 <Grid Grid.Column="1">
                     <DockPanel>
-                        <ListView DockPanel.Dock="Top" Name="memberListView" Background="Transparent" Height="545" ScrollViewer.CanContentScroll="False">
+                        <ListView DockPanel.Dock="Top" Name="memberListView" ItemsSource="{Binding Members}" Background="Transparent" Height="545" ScrollViewer.CanContentScroll="False">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal">
                                             <Label Content="Tên thành viên:" VerticalAlignment="Center" Margin="5" Style="{DynamicResource LabelStyle1}"/>
                                             <TextBox Text="{Binding Name}" Height="35" Width="190" Style="{DynamicResource TextBoxStyle}"/>
-                                            <ListView Tag="{Binding ID}" ItemsSource="{Binding PayingList}" MinWidth="485" LostFocus="ListView_LostFocus">
+                                            <ListView ItemsSource="{Binding Payments}" MinWidth="485" LostFocus="ListView_LostFocus">
                                                 <ListView.Template>
                                                     <ControlTemplate>
                                                         <ItemsPresenter/>
@@ -518,9 +532,9 @@
                                                 </ListView.Template>
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
-                                                        <StackPanel Tag="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=Tag}" Orientation="Horizontal" Background="Transparent" Margin="0,-5,0,-5">
+                                                        <StackPanel Tag="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext}" Orientation="Horizontal" Background="Transparent" Margin="0,-5,0,-5">
                                                             <Label Content="Khoảng chi:" Margin="5" VerticalAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                                                            <TextBox Text="{Binding PayingFor}" Height="35" Width="160" Style="{DynamicResource TextBoxStyle}"/>
+                                                            <TextBox Text="{Binding Name}" Height="35" Width="160" Style="{DynamicResource TextBoxStyle}"/>
                                                             <Label Content="Chi phí:" Margin="5" VerticalAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
                                                             <TextBox Text="{Binding Cost}" Height="35" Width="100" Style="{DynamicResource TextBoxStyle}"/>
                                                             <Button Name="removePayingButton" Height="35" Width="35" VerticalAlignment="Center" Click="removePayingButton_Click" Style="{DynamicResource ButtonStyleRemove}"/>
@@ -529,7 +543,7 @@
                                                 </ListView.ItemTemplate>
                                             </ListView>
                                         </StackPanel>
-                                        <Button Name="addPayingButton" Content="Thêm khoảng chi" Tag="{Binding}" Height="40" Width="140" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle2}" Click="addPayingButton_Click"/>
+                                        <Button Name="addPayingButton" Content="Thêm khoảng chi" Height="40" Width="140" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle2}" Click="addPaymentButton_Click"/>
                                     </StackPanel>
 
                                 </DataTemplate>

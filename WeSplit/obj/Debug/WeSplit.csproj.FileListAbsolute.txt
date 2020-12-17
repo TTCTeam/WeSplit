@@ -47,3 +47,8 @@ C:\Users\Minh Tan\Documents\GitHub\WeSplit\WeSplit\obj\Debug\WeSplit.csproj.Core
 C:\Users\Minh Tan\Documents\GitHub\WeSplit\WeSplit\obj\Debug\WeSplit.csproj.CopyComplete
 C:\Users\Minh Tan\Documents\GitHub\WeSplit\WeSplit\obj\Debug\WeSplit.exe
 C:\Users\Minh Tan\Documents\GitHub\WeSplit\WeSplit\obj\Debug\WeSplit.pdb
+C:\Users\Minh Tan\Documents\GitHub\WeSplit\WeSplit\obj\Debug\WeSplit_Content.g.cs
+C:\Users\Minh Tan\Documents\GitHub\WeSplit\WeSplit\bin\Debug\EntityFramework.dll
+C:\Users\Minh Tan\Documents\GitHub\WeSplit\WeSplit\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Minh Tan\Documents\GitHub\WeSplit\WeSplit\bin\Debug\EntityFramework.xml
+C:\Users\Minh Tan\Documents\GitHub\WeSplit\WeSplit\bin\Debug\EntityFramework.SqlServer.xml
