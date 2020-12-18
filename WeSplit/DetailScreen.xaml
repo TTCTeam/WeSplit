@@ -113,7 +113,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="1">
 
                 <Border CornerRadius="10" 
                     BorderThickness="1" 
@@ -138,7 +138,7 @@
 
             </Grid>
 
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="0">
 
 
                 <Border CornerRadius="10" 
@@ -146,47 +146,22 @@
                     Margin="2"
                     BorderBrush="Black"
                     Background="Black">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                        <TextBlock Text="TRẠNG THÁI"
+                        <TextBlock Text="TRẠNG THÁI: "
                                     FontWeight="Bold"
                            FontStyle="Italic"
-                           FontSize="18" 
+                           FontSize="15" 
                            Foreground="White" 
                            HorizontalAlignment="Center"/>
-                        <Grid >
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Grid.Column="0" HorizontalAlignment="Center">
-                                <RadioButton Content="Từng đi"
-                                         FontSize="15"
-                                         FontStyle="Italic"
-                                         Foreground="White"
-                                         Margin="0,0,10,0"
-                                         />
-                            </Grid>
-
-                            <Grid Grid.Column="1" HorizontalAlignment="Center">
-                                <RadioButton Content="Đang đi"
-                                         FontSize="15"
-                                         FontStyle="Italic"
-                                         Foreground="White"
-                                         IsChecked="True"/>
-
-
-                            </Grid>
-
-
-                        </Grid>
-
-
-
-
-
+                        <TextBlock Text="{Binding Status}"
+                                   Margin="10,0,0,0"
+                                    FontWeight="Bold"
+                           FontStyle="Italic"
+                           FontSize="15" 
+                           Foreground="White" 
+                           HorizontalAlignment="Center"/>
+                                         
                     </StackPanel>
 
                 </Border>
@@ -287,46 +262,48 @@
                            HorizontalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="1" Margin="0,0,0,10">
 
-                        <ListView Background="Black"
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,0,0,0">
+                            <Image Source="{Binding ImageCover}"
+                                                  />
+                        </Grid>
+
+                        <Grid Grid.Column="1" Margin="15,10,0,0">
+                            <StackPanel Orientation="Vertical">
+
+                                <TextBlock                 
+                                    Text="{Binding Name}"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    TextWrapping="WrapWithOverflow"
+                                                   />
+
+
+                                <ListView Background="Black"
                            x:Name="listLocation"
+                                          
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                   ScrollViewer.CanContentScroll="True"
                             >
 
-                            <ListView.ItemsPanel>
-                                <ItemsPanelTemplate >
-                                    <StackPanel />
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate >
+                                            <StackPanel />
 
-                                </ItemsPanelTemplate>
-                            </ListView.ItemsPanel>
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
 
-                            <ListView.ItemTemplate>
+                                    <ListView.ItemTemplate>
 
-                                <DataTemplate>
-                                    <Grid>
+                                        <DataTemplate>
+                                            <StackPanel >
 
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="3*"/>
-                                            <ColumnDefinition Width="2*"/>
-
-                                        </Grid.ColumnDefinitions>
-                                        <Grid Grid.Column="0" Margin="5,0,0,0">
-                                            <Image Source="{Binding ImageCover}"
-                                                   Width="250"
-                                                   Height="200"/>
-                                        </Grid>
-
-                                        <Grid Grid.Column="1" Margin="15,10,0,0">
-                                            <StackPanel Orientation="Vertical">
-
-                                                <TextBlock x:Name="Ơ"
-                                                   Text="Hà Giang"
-                                                           Foreground="White"
-                                                           FontWeight="Bold"
-                                                   TextWrapping="WrapWithOverflow"
-                                                   />       
                                                 <StackPanel Orientation="Horizontal">
                                                     <Image Source="./Images/DetailScreen/placeholder.png"
                                                            RenderOptions.BitmapScalingMode="HighQuality"
@@ -334,7 +311,7 @@
                                                            Width="15"/>
                                                     <TextBlock
                                                         Margin="10,0,0,0"
-                                                        Text="{Binding Path=Place_Name}" 
+                                                        Text="{Binding Path = Location}" 
                                                        FontSize="15"
                                                        Foreground="White"/>
 
@@ -344,10 +321,10 @@
                                                     <TextBlock Text="Arrive at: " 
                                                FontSize="15"
                                                Foreground="White"/>
-                                                    
+
                                                     <TextBlock
                                        Margin="10,0,0,0"
-                                        Text="{Binding Path=arriveTime}" 
+                                        Text="{Binding Path=ArrivalTime}" 
                                                FontSize="15"
                                                Foreground="White"/>
 
@@ -360,25 +337,29 @@
 
                                                     <TextBlock
                                         Margin="10,0,0,0"
-                                        Text="{Binding Path=leaveTime}" 
+                                        Text="{Binding Path=LeavingTime}" 
                                                FontSize="15"
                                                Foreground="White"/>
 
                                                 </StackPanel>
-                                               
+
+
                                             </StackPanel>
+                                           
+                                        </DataTemplate>
 
-                                        </Grid>
+                                    </ListView.ItemTemplate>
 
-                                    </Grid>
-                                </DataTemplate>
+                                </ListView>
 
-                            </ListView.ItemTemplate>
+                                
+                            </StackPanel>
 
-                        </ListView>
+                        </Grid>
 
-                     
-                       
+                        
+
+
 
                     </Grid>
 
@@ -431,7 +412,7 @@
 
                                 <DataTemplate>
                                     <Image Width="210" Height="150"
-                                           Source="{Binding }"
+                                           Source="{Binding Path = ImagePath}"
                                            RenderOptions.BitmapScalingMode="HighQuality"
                                            Stretch="UniformToFill"/>
                                 </DataTemplate>
@@ -487,7 +468,7 @@
                         <lvc:PieChart LegendLocation="Bottom" DataClick="pieChartExpenditure_DataClick" 
                                       x:Name="pieChartExpenditure"
                       Hoverable="True" DataTooltip="{x:Null}" Series="{Binding PieSeries}">
-                          
+
                         </lvc:PieChart>
 
 
@@ -587,7 +568,7 @@
                                             <TextBlock  
                                                 Margin="5,0,0,0"
                                                 x:Name="sum"
-                                                        Text="4,45 Triệu"
+                                                        Text="{Binding Sum}"
                                                         FontSize="12"
                                                         Foreground="White"
                                                         FontWeight="Bold"/>
@@ -629,7 +610,7 @@
                                             <TextBlock  
                                                 Margin="5,0,0,0"
                                                 
-                                                        Text="1,48 Triệu"
+                                                        Text="{Binding Average}"
                                                         FontSize="12"
                                                         Foreground="White"
                                                         FontWeight="Bold"/>
@@ -683,17 +664,17 @@
                                         </Grid.RowDefinitions>
                                         <TextBlock Grid.Column="0"
                                            
-                                            Text="{Binding Name_Mem}"
+                                            Text="{Binding Path=MemberName}"
                                                    FontSize="15"
                                                    Foreground="White"/>
 
                                         <WrapPanel Grid.Column="1">
-                                            <TextBlock 
+                                            <TextBlock Margin="100,0,0,0"
                                            HorizontalAlignment="Right"
-                                            Text="{Binding Pay}" 
+                                            Text="{Binding Path=Pay}" 
                                                  FontSize="15" 
                                                Foreground="{Binding Pay, Converter={StaticResource colorConverter}}"/>
-                                            <TextBlock Text="Nghìn"  Foreground="{Binding Pay, Converter={StaticResource colorConverter}}"
+                                            <TextBlock  Text=" VND"  Foreground="{Binding Pay, Converter={StaticResource colorConverter}}"
                                                    FontSize="15"/>
                                         </WrapPanel>
 

@@ -57,7 +57,7 @@ namespace WeSplit
         BindingList<Place> _list = new BindingList<Place>();
 
         Place selected;
-        List<Place> list;
+       // List<Place> list;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

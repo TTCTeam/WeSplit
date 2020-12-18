@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Minh Tan\Documents\GitHub\WeSplit\WeSplit\obj\Debug\
+D:\TTCTeam\WeSplit_PreVer\WeSplit\obj\Debug\
 WeSplit
 none
 false
 DEBUG;TRACE
-C:\Users\Minh Tan\Documents\GitHub\WeSplit\WeSplit\App.xaml
+D:\TTCTeam\WeSplit_PreVer\WeSplit\App.xaml
 531191140
 22049316984
 211161417662
-23-1748015249
+23660372329
 AddJourneyView.xaml;DetailScreen.xaml;HomeScreenUserControl.xaml;MainWindow.xaml;SplashScreen.xaml;
 
 False
