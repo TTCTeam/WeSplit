@@ -87,6 +87,7 @@
       <DependentUpon>AddJourneyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ColorPayConverter.cs" />
+    <Compile Include="DAO\TripDAO.cs" />
     <Compile Include="DatabaseModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
