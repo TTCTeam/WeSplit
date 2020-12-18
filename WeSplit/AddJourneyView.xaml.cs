@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -183,9 +184,11 @@ namespace WeSplit
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
+            //save Images
+            SaveImageToFolder(Trip.Images.ToList());
+
             if (TripIdUpdate == -1)
             {
-                //save Images
                 DB.Trips.Add(Trip);
                 DB.SaveChanges();
             }
@@ -204,8 +207,6 @@ namespace WeSplit
         {
             //return to homescreen
             Handler?.Invoke(0);
-
-
         }
 
 
@@ -213,11 +214,42 @@ namespace WeSplit
         {
             var result = MessageBox.Show("Bạn có muốn xoá thành viên đã chọn?", "Cảnh báo", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-            if (result==MessageBoxResult.Yes)
+            if (result == MessageBoxResult.Yes)
             {
                 Member member = (Member)memberListView.SelectedItem;
                 Trip.Members.Remove(member);
             }
         }
+
+        public void SaveImageToFolder(List<Image> images)
+        {
+            // Create Folder
+            var currentFolder = AppDomain.CurrentDomain.BaseDirectory;
+            var directoryPath = $"{currentFolder}Images\\{Guid.NewGuid()}";
+            if (!System.IO.Directory.Exists(directoryPath))
+                System.IO.Directory.CreateDirectory(directoryPath);
+
+            //copy to Images folder and write to data
+            foreach (var image in images)
+            {
+                if (!AbsoluteConverter.isRelativePath(image.ImagePath))
+                {
+                    var inFo = new FileInfo(image.ImagePath);
+                    var newname = $"{Guid.NewGuid()}{inFo.Extension}";
+                    File.Copy(image.ImagePath, $"{directoryPath}\\{newname}");
+                    image.ImagePath = ConvertAbsolutePathToRelativePath($"{directoryPath}\\{newname}");
+                }
+            }
+        }
+
+        private string ConvertAbsolutePathToRelativePath(string absolutePath)
+        {
+            string relativePath;
+            int temp = absolutePath.LastIndexOf("Images");
+            relativePath = absolutePath.Substring(temp);
+            return relativePath;
+        }
+
+       
     }
 }

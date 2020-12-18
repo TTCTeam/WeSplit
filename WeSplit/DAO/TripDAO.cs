@@ -32,7 +32,7 @@ namespace WeSplit.DAO
                         where (p.Trip.Status == status && (p.Name.Contains(keyword) || p.Trip.Name.Contains(keyword)))
                         select p.Trip;
 
-            listTrips = query.ToList();
+            listTrips = query.Distinct().ToList();
             return listTrips;
         }
 

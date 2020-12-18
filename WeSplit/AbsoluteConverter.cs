@@ -8,19 +8,32 @@ using System.Windows.Data;
 
 namespace WeSplit
 {
-    class AbsoluteConverter : IValueConverter
+    public class AbsoluteConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string relative = (string)value;
-            var folder = AppDomain.CurrentDomain.BaseDirectory;
-            var absolute = $"{folder}{relative}";
+            string path = (string)value;
+            string absolute;
+            if (isRelativePath(path))
+            {
+                var folder = AppDomain.CurrentDomain.BaseDirectory;
+                absolute = $"{folder}{path}";
+            }
+            else
+            {
+                absolute = path;
+            }
             return absolute;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        static public bool isRelativePath(string imagePath)
+        {
+            return (imagePath.StartsWith("Images"));
         }
     }
 }

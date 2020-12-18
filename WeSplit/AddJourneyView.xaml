@@ -9,6 +9,9 @@
              d:DesignHeight="700" d:DesignWidth="1200"
              Loaded="UserControl_Loaded">
     <UserControl.Resources>
+
+        <local:AbsoluteConverter x:Key="converter"/>
+
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
         <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
@@ -537,7 +540,7 @@
                                 <DataTemplate>
                                     <StackPanel Height="90" Width="100" Margin="-4">
                                         <StackPanel.Background>
-                                            <ImageBrush ImageSource="{Binding ImagePath}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                            <ImageBrush ImageSource="{Binding ImagePath, Converter={StaticResource converter}}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
                                         </StackPanel.Background>
                                         <Button Name="removeImageButton" Height="20" Width="20" HorizontalAlignment="Right" Click="removeImageButton_Click" Style="{DynamicResource ButtonStyleRemove}"/>
                                     </StackPanel>
