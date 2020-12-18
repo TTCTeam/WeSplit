@@ -10,20 +10,20 @@
 namespace WeSplit
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class StatusDescription
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public StatusDescription()
         {
-            this.Trips = new HashSet<Trip>();
+            this.Trips = new ObservableCollection<Trip>();
         }
     
         public int Status { get; set; }
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Trip> Trips { get; set; }
+        public virtual ObservableCollection<Trip> Trips { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -27,10 +28,23 @@ namespace WeSplit
         private Trip Trip { get; set; }
         private WeSplitEntities DB { get; set; }
 
+        private int TripIdUpdate { get; set; }
+
+        public delegate void SwitchViewCallback(int index);
+        public event SwitchViewCallback Handler;
+
         public AddJourneyView()
         {
             InitializeComponent();
-            
+            TripIdUpdate = -1;
+            contentLable.Content = "THÊM CHUYẾN ĐI";
+        }
+
+        public AddJourneyView(int tripID)
+        {
+            InitializeComponent();
+            TripIdUpdate = tripID;
+            contentLable.Content = "CẬP NHẬT CHUYẾN ĐI";
         }
 
         private void ListView_LostFocus(object sender, RoutedEventArgs e)
@@ -42,17 +56,17 @@ namespace WeSplit
         {
             Member member = (Member)(((sender as Button).Parent) as StackPanel).DataContext;
             member.Payments.Add(new Payment());
-            
+
         }
 
         private void addMemberButton_Click(object sender, RoutedEventArgs e)
         {
-            Trip.Members.Add(new Member { Payments = new BindingList<Payment>() });
+            Trip.Members.Add(new Member { Payments = new ObservableCollection<Payment>() });
         }
 
         private void removeImageButton_Click(object sender, RoutedEventArgs e)
         {
-            BindingList<Image> images = imagesListView.ItemsSource as BindingList<Image>;
+            ObservableCollection<Image> images = imagesListView.ItemsSource as ObservableCollection<Image>;
             Image thisImage = (Image)(sender as Button).DataContext;
             images.Remove(thisImage);
         }
@@ -67,16 +81,22 @@ namespace WeSplit
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-         
+
             DB = new WeSplitEntities();
-            var statusDescriptions = DB.StatusDescriptions.Select((s)=>s.Description).ToList();
+            var statusDescriptions = DB.StatusDescriptions.Select((s) => s.Description).ToList();
             statusComboBox.ItemsSource = statusDescriptions;
 
-            
-            Trip = new Trip { Status = 0, Members = new BindingList<Member>(), Images = new BindingList<Image>(), Waypoints = new BindingList<Waypoint>() };
+            if (TripIdUpdate == -1)
+            {
+                Trip = new Trip { Status = 0, Members = new ObservableCollection<Member>(), Images = new ObservableCollection<Image>(), Waypoints = new ObservableCollection<Waypoint>() };
+            }
+            else
+            {
+                Trip = DB.Trips.Find(TripIdUpdate);
+
+            }
             this.DataContext = Trip;
         }
-
 
         private void imagesListView_Drop(object sender, DragEventArgs e)
         {
@@ -84,7 +104,7 @@ namespace WeSplit
 
             if (Trip.Images == null)
             {
-                Trip.Images = new BindingList<Image>();
+                Trip.Images = new ObservableCollection<Image>();
             }
 
             foreach (var filePath in filePaths)
@@ -134,7 +154,7 @@ namespace WeSplit
                 var files = openFileDialog.FileNames;
                 if (Trip.Images == null)
                 {
-                    Trip.Images = new BindingList<Image>();
+                    Trip.Images = new ObservableCollection<Image>();
                 }
 
                 foreach (var file in files)
@@ -148,27 +168,56 @@ namespace WeSplit
         private void showRouteToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             imagesListView.Visibility = Visibility.Collapsed;
-            routeDataGrid.Visibility = Visibility.Visible;
+            addImageButton.Visibility = Visibility.Hidden;
+            imagesStackPanel.Background = Brushes.Transparent;
+            showRouteDataGridEffect.Visibility = Visibility.Visible;
         }
 
         private void showRouteToggleButton_Unchecked(object sender, RoutedEventArgs e)
         {
             imagesListView.Visibility = Visibility.Visible;
-            routeDataGrid.Visibility = Visibility.Collapsed;
+            addImageButton.Visibility = Visibility.Visible;
+            imagesStackPanel.Background = Brushes.DarkSlateGray;
+            showRouteDataGridEffect.Visibility = Visibility.Collapsed;
         }
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            //save Images
+            if (TripIdUpdate == -1)
+            {
+                //save Images
+                DB.Trips.Add(Trip);
+                DB.SaveChanges();
+            }
+            else
+            {
+                DB.SaveChanges();
+            }
 
 
-            DB.Trips.Add(Trip);
-            DB.SaveChanges();
+            //return to homescreen
+            Handler?.Invoke(0);
+
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
             //return to homescreen
+            Handler?.Invoke(0);
+
+
+        }
+
+
+        private void removeMemberButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Bạn có muốn xoá thành viên đã chọn?", "Cảnh báo", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result==MessageBoxResult.Yes)
+            {
+                Member member = (Member)memberListView.SelectedItem;
+                Trip.Members.Remove(member);
+            }
         }
     }
 }

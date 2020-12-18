@@ -10,14 +10,14 @@
 namespace WeSplit
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Member
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Member()
         {
-            this.Payments = new HashSet<Payment>();
+            this.Payments = new ObservableCollection<Payment>();
         }
     
         public int ID { get; set; }
@@ -26,6 +26,6 @@ namespace WeSplit
     
         public virtual Trip Trip { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ObservableCollection<Payment> Payments { get; set; }
     }
 }

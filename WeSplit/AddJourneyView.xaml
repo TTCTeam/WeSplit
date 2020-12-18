@@ -9,7 +9,6 @@
              d:DesignHeight="700" d:DesignWidth="1200"
              Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <!--<sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">15</sys:Double>-->
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
         <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
@@ -419,6 +418,50 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ButtonStyle4" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="#8C1007"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="#F5D90D"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="Red"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="#49524E"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=memberListView, Path=SelectedIndex}" Value="-1">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:1}">
         <Grid Margin="20,0,20,0">
@@ -433,7 +476,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" FontWeight="Bold" FontStyle="Italic" FontSize="30" Margin="0,20,0,0" Content="THÊM CHUYẾN ĐI"  Foreground="Gold"/>
+                <Label Grid.Column="0" Name="contentLable" FontWeight="Bold" FontStyle="Italic" FontSize="30" Margin="0,20,0,0" Foreground="Gold"/>
                 <Grid Grid.Column="1">
                     <StackPanel Margin="20,0,20,0" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Name="saveButton" Height="40" Width="40" Margin="5" Click="saveButton_Click">
@@ -475,38 +518,40 @@
                         <Label Content="Trạng thái" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
                         <ComboBox Name="statusComboBox" Height="35" Width="220" Margin="2" SelectedIndex="{Binding Status, TargetNullValue=0}" Style="{DynamicResource ComboBoxStyle}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Background="DarkSlateGray" Margin="5,5,5,0">
-                        <Label Content="Hình ảnh" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
-                        <Button Name="addImageButton" Height="30" Width="35" Margin="205,0,0,0" Click="addImageButton_Click" Style="{DynamicResource ButtonStyle3}">
-                            <Button.Background>
-                                <ImageBrush ImageSource="Images/add-image.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
-                            </Button.Background>
-                        </Button>
+                    <StackPanel Background="DarkSlateGray" Name="imagesStackPanel">
+                        <StackPanel Orientation="Horizontal" Margin="5,5,5,0">
+                            <Label Content="Hình ảnh" Height="35" Width="100" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle1}"/>
+                            <Button Name="addImageButton" Height="30" Width="35" Margin="205,0,0,0" Click="addImageButton_Click" Style="{DynamicResource ButtonStyle3}">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Images/add-image.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                </Button.Background>
+                            </Button>
+                        </StackPanel>
+                        <ListView Name="imagesListView" ItemsSource="{Binding Images}" Tag="{Binding}" Height="270" Margin="5,0,5,5" Padding="3,0,3,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AllowDrop="True" Drop="imagesListView_Drop" DragOver="imagesListView_DragOver">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Height="90" Width="100" Margin="-4">
+                                        <StackPanel.Background>
+                                            <ImageBrush ImageSource="{Binding ImagePath}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                        </StackPanel.Background>
+                                        <Button Name="removeImageButton" Height="20" Width="20" HorizontalAlignment="Right" Click="removeImageButton_Click" Style="{DynamicResource ButtonStyleRemove}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackPanel>
-                    <ListView Name="imagesListView" ItemsSource="{Binding Images}" Tag="{Binding}" Background="DarkSlateGray" Height="270" BorderThickness="0" Margin="5,0,5,5" Padding="3,0,3,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AllowDrop="True" Drop="imagesListView_Drop" DragOver="imagesListView_DragOver">
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Height="90" Width="100" Margin="-4">
-                                    <StackPanel.Background>
-                                        <ImageBrush ImageSource="{Binding ImagePath}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
-                                    </StackPanel.Background>
-                                    <Button Name="removeImageButton" Height="20" Width="20" HorizontalAlignment="Right" Click="removeImageButton_Click" Style="{DynamicResource ButtonStyleRemove}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    <StackPanel Orientation="Horizontal" Margin="5,1,5,1">
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,1">
                         <Label Content="Lộ trình" Style="{DynamicResource LabelStyle1}"/>
                         <ToggleButton Name="showRouteToggleButton" Checked="showRouteToggleButton_Checked" Unchecked="showRouteToggleButton_Unchecked"></ToggleButton>
                     </StackPanel>
-                    <materialDesign:TransitioningContent Name="showRouteDataGridEffect" OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:1}">
+                    <materialDesign:TransitioningContent Name="showRouteDataGridEffect" Visibility="Collapsed" OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:1}">
 
-                        <DataGrid Name="routeDataGrid" ItemsSource="{Binding Waypoints}" Height="260" FontSize="12" Visibility="Collapsed" AutoGenerateColumns="False">
+                        <DataGrid Name="routeDataGrid" ItemsSource="{Binding Waypoints}" Height="260" FontSize="12" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="Auto" Binding="{Binding Location}" Header="Điểm dừng chân"/>
                                 <DataGridTextColumn Width="*" Binding="{Binding ArrivalTime, StringFormat={}{0:HH:mm dd/MM}, ConverterCulture=vi-VI}" Header="Thời gian đến"/>
@@ -549,7 +594,10 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                        <Button Name="addMemberButton" Content="Thêm thành viên" Height="35" Width="160" DockPanel.Dock="Bottom" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle1}" Click="addMemberButton_Click"/>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
+                            <Button Name="removeMemberButton" Content="Xoá thành viên" Height="35" Width="160" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyle4}" Click="removeMemberButton_Click"/>
+                            <Button Name="addMemberButton" Content="Thêm thành viên" Height="35" Width="160" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyle1}" Click="addMemberButton_Click"/>
+                        </StackPanel>
                     </DockPanel>
                 </Grid>
             </Grid>

@@ -10,16 +10,16 @@
 namespace WeSplit
 {
     using System;
-    using System.Collections.Generic;
-    
+    using System.Collections.ObjectModel;
+
     public partial class Trip
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Trip()
         {
-            this.Images = new HashSet<Image>();
-            this.Members = new HashSet<Member>();
-            this.Waypoints = new HashSet<Waypoint>();
+            this.Images = new ObservableCollection<Image>();
+            this.Members = new ObservableCollection<Member>();
+            this.Waypoints = new ObservableCollection<Waypoint>();
         }
     
         public int ID { get; set; }
@@ -30,11 +30,11 @@ namespace WeSplit
         public Nullable<int> Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Images { get; set; }
+        public virtual ObservableCollection<Image> Images { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Member> Members { get; set; }
+        public virtual ObservableCollection<Member> Members { get; set; }
         public virtual StatusDescription StatusDescription { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Waypoint> Waypoints { get; set; }
+        public virtual ObservableCollection<Waypoint> Waypoints { get; set; }
     }
 }

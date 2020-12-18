@@ -26,7 +26,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Cost" Type="int" />
           <Property Name="MemberID" Type="int" />
         </EntityType>
@@ -174,7 +174,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Cost" Type="Int32" />
           <Property Name="MemberID" Type="Int32" />
           <NavigationProperty Name="Member" Relationship="Self.FK_Payment_Member" FromRole="Payment" ToRole="Member" />

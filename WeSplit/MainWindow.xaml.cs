@@ -21,6 +21,7 @@ namespace WeSplit
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -52,17 +53,24 @@ namespace WeSplit
 
             switch (index)
             {
-                case 1:
+                case 0:
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new HomeScreenUserControl());
                     break;
-                case 0:
+                case 1:
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new AddJourneyView());
+                    AddJourneyView addJourneyView = new AddJourneyView();
+                    addJourneyView.Handler += switchView;
+                    GridPrincipal.Children.Add(addJourneyView);
                     break;
                 default:
                     break;
             }
+        }
+
+        private void switchView(int index)
+        {
+            ListViewMenu.SelectedIndex = index;
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
