@@ -224,16 +224,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\PlaceImages\DongBangSongCuuLong.jpg" />
-    <Resource Include="Images\PlaceImages\HoGuom.jpg" />
-    <Resource Include="Images\PlaceImages\NhaHatLonHaNoi.jpg" />
-    <Resource Include="Images\PlaceImages\PhoCoHoiAn.jpg" />
-    <Resource Include="Images\PlaceImages\PhuQuoc.jpg" />
-    <Resource Include="Images\PlaceImages\QuangTruongBaDinh.jpg" />
-    <Resource Include="Images\PlaceImages\RuongBacThang.jpg" />
-    <Resource Include="Images\PlaceImages\VinhHaLong.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Images\DetailScreen\delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -279,6 +269,189 @@
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
       <LastGenOutput>DatabaseModel.cs</LastGenOutput>
     </Content>
+    <None Include="Images\3bb9eb70-c1a8-40e8-9228-5593c5e1497c\122cbe4e-f418-44f9-93a4-9712ffba65c8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\3bb9eb70-c1a8-40e8-9228-5593c5e1497c\3e1df46d-7a6c-4310-be0f-94f37afd2069.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\3bb9eb70-c1a8-40e8-9228-5593c5e1497c\5491ee6b-1f4c-4212-bda8-368218cba7a1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\3bb9eb70-c1a8-40e8-9228-5593c5e1497c\9343506f-719c-418b-a5d1-ea366f54352a.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\3bb9eb70-c1a8-40e8-9228-5593c5e1497c\a1781286-da35-494d-8407-53bd24b3781c.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\3bb9eb70-c1a8-40e8-9228-5593c5e1497c\a83873d4-46fe-4466-9345-99b256de251c.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\798b3a72-83d7-4635-992e-867dbb937d2a\0528db57-ce3f-4607-9393-bfb6e7cc8d20.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\798b3a72-83d7-4635-992e-867dbb937d2a\68b4cf6c-1c2b-4a5c-8e7b-63c49b993413.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\798b3a72-83d7-4635-992e-867dbb937d2a\72d36383-a479-4638-aa7e-ce3316e96b4a.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\798b3a72-83d7-4635-992e-867dbb937d2a\a225605a-f3a2-4fc1-848e-cb8018a6a025.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\798b3a72-83d7-4635-992e-867dbb937d2a\e822862a-4b5b-4b64-b9cd-06b98904de4a.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\798b3a72-83d7-4635-992e-867dbb937d2a\e9de0a33-9ab9-43b8-a04b-9c30e48eb7ba.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\7d91e425-03bc-4a0d-b6da-2c76e3dae5ae\262446b6-f1cb-4cdc-a767-f3254a90e1b3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\7d91e425-03bc-4a0d-b6da-2c76e3dae5ae\26c2caae-7e7f-438c-83fd-d5eb6bfce0f4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\7d91e425-03bc-4a0d-b6da-2c76e3dae5ae\50a37584-6fec-4387-b13b-1cd259da2471.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\7d91e425-03bc-4a0d-b6da-2c76e3dae5ae\6403ef99-a523-4f75-9c8f-b3a3df404a70.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\7d91e425-03bc-4a0d-b6da-2c76e3dae5ae\b2bdebe4-c158-4167-8268-cc821cb65b5b.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\7d91e425-03bc-4a0d-b6da-2c76e3dae5ae\b7e0c60a-d026-473c-beb1-c7d72e614d74.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\7d91e425-03bc-4a0d-b6da-2c76e3dae5ae\de618fe0-2fc0-46eb-a216-f5c94755b78a.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\866176c1-1692-46f8-b6ee-56fbfb1715b3\2bc884cb-4f7b-4822-a0ed-8dfae1395bcf.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\866176c1-1692-46f8-b6ee-56fbfb1715b3\361f9191-92c5-46a2-bbdd-c07f31d4082f.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\866176c1-1692-46f8-b6ee-56fbfb1715b3\5537ea81-c3f7-4c04-a7d6-b74172c56cf4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\866176c1-1692-46f8-b6ee-56fbfb1715b3\a846f5db-5dcc-4e06-bfd8-670cef58f318.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\866176c1-1692-46f8-b6ee-56fbfb1715b3\a98febfd-eaec-49f5-801c-7742554656ee.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\9522dd33-79a0-47d4-afc4-9277dd23c134\16906888-8464-4a7c-a359-74bd6ee9856e.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\9522dd33-79a0-47d4-afc4-9277dd23c134\734f982f-cc44-4b8e-8c7a-257eabed1e0c.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\9522dd33-79a0-47d4-afc4-9277dd23c134\76743338-8bea-40e6-a19f-3a50b90c2648.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\9522dd33-79a0-47d4-afc4-9277dd23c134\b8915163-58e2-47de-9850-f23f41fe0069.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\9522dd33-79a0-47d4-afc4-9277dd23c134\dc366265-0725-4b93-8b74-aeb1f938269b.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\9522dd33-79a0-47d4-afc4-9277dd23c134\de8bc1e0-9d43-4808-9853-1a202c06c153.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\a18db8a2-47d3-48a6-be03-b68f2415add9\579e48c8-f2a5-4e60-9eff-bf8cbb5b2e48.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\a18db8a2-47d3-48a6-be03-b68f2415add9\6731e483-39f5-496c-be19-835932770b27.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\a18db8a2-47d3-48a6-be03-b68f2415add9\70dceafa-b93d-4c25-9f37-47fec0ac8556.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\a18db8a2-47d3-48a6-be03-b68f2415add9\7dad398d-14f8-496d-b14f-42694f133eda.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\a18db8a2-47d3-48a6-be03-b68f2415add9\90e35cd3-07a7-4b28-a6fc-75ae18adda08.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\a18db8a2-47d3-48a6-be03-b68f2415add9\aa70f9b4-9449-482c-8845-ebcf781e7b86.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\a3c6e33f-54f8-45d6-95e8-f41df2a6c66a\153a973b-d6d5-45ba-a933-724b232ad3cc.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\a3c6e33f-54f8-45d6-95e8-f41df2a6c66a\2d4af57e-7948-41fd-99bf-64e711bf6d35.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\a3c6e33f-54f8-45d6-95e8-f41df2a6c66a\46da6e8f-101f-42dc-bf47-d0c41e507eb2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\a3c6e33f-54f8-45d6-95e8-f41df2a6c66a\89a98571-781a-4627-9ccb-0a429c4585e7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\a3c6e33f-54f8-45d6-95e8-f41df2a6c66a\a4c371e4-0e57-46f7-ad07-182b3421c242.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\a3c6e33f-54f8-45d6-95e8-f41df2a6c66a\bd78af60-9c12-4423-a135-98ad2e86067e.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\ada88a9f-08e0-433f-b265-72e05d2283f3\2c7f4f3c-7f22-4f5d-97f5-20c3676a6194.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\ada88a9f-08e0-433f-b265-72e05d2283f3\586e285f-eb3d-4c59-8276-169f825f48d2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\ada88a9f-08e0-433f-b265-72e05d2283f3\6281adb7-4a42-4202-a971-f391459b2f91.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\ada88a9f-08e0-433f-b265-72e05d2283f3\d0b9dfb6-28f6-4668-ac0e-e3856a0e4526.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\ada88a9f-08e0-433f-b265-72e05d2283f3\df4faf4f-3748-4ba3-83ce-b7fa049a35fd.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\ae571e73-41db-4af0-ba97-2f62622e1e21\1f1fe9f0-458e-4c17-9462-9ee7a73761b8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\ae571e73-41db-4af0-ba97-2f62622e1e21\673a38bd-9f7d-465b-ba9c-b1450265e005.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\ae571e73-41db-4af0-ba97-2f62622e1e21\72ce0696-1fd7-4ed9-86d9-d4f6540a8145.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\ae571e73-41db-4af0-ba97-2f62622e1e21\76a864b7-fc81-4cff-a839-a1f1276107d7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\ae571e73-41db-4af0-ba97-2f62622e1e21\77955f94-e540-461c-a65f-d83cd65a01a8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\ae571e73-41db-4af0-ba97-2f62622e1e21\c394d70e-e493-42b8-b8e2-b116af3a0fad.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\ae571e73-41db-4af0-ba97-2f62622e1e21\ecdf932c-a9e2-4693-81f3-db1ea55da005.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\eb5f4e8d-ad2f-4ac5-9532-3aa930544984\0c317845-47a1-4e99-85b0-772652cf5b6e.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\eb5f4e8d-ad2f-4ac5-9532-3aa930544984\18ae4217-34e4-45f5-8f82-c855929447ec.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\eb5f4e8d-ad2f-4ac5-9532-3aa930544984\31c745ad-f7e7-4687-a8ff-df2ee86da0cf.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\eb5f4e8d-ad2f-4ac5-9532-3aa930544984\5cb38f34-c911-416f-b8f4-30108c3528e5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\eb5f4e8d-ad2f-4ac5-9532-3aa930544984\6ead6ab8-af44-4405-9b9f-8c2466dd1768.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\eb5f4e8d-ad2f-4ac5-9532-3aa930544984\aa5c7e10-cf10-481e-a616-0d9b369e1e89.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\eb5f4e8d-ad2f-4ac5-9532-3aa930544984\cb6c5cd9-9a30-41f5-aeef-618c7abce619.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Resource Include="Images\prohibition.png" />
     <Resource Include="Images\save_icon.png" />
   </ItemGroup>
