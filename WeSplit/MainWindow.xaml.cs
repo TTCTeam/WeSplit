@@ -52,11 +52,11 @@ namespace WeSplit
 
             switch (index)
             {
-                case 1:
+                case 0:
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new HomeScreenUserControl());
                     break;
-                case 0:
+                case 1:
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new AddJourneyView());
                     break;

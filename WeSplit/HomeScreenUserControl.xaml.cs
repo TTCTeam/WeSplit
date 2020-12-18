@@ -13,85 +13,79 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WeSplit.DAO;
 
 namespace WeSplit
 {
     /// <summary>
     /// Interaction logic for HomeScreenUserControl.xaml
     /// </summary>
-    public partial class HomeScreenUserControl : UserControl
+    public partial class HomeScreenUserControl : UserControl, INotifyPropertyChanged
     {
         public HomeScreenUserControl()
         {
             InitializeComponent();
         }
 
-        class Place // DTO = Data transfer object - Entity
+        WeSplitEntities DB = new WeSplitEntities();
+
+        List<Trip> _oldTrips;
+
+        List<Trip> _newTrips;
+
+        Trip selected;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void displayTrip()
         {
-            public string Name { get; set; }
-            public string Thumbnail { get; set; }
+            var keyword = SearchBox.Text;
+
+            _oldTrips = TripDAO.Instance.GetTrips(1, keyword, DB);
+            _newTrips = TripDAO.Instance.GetTrips(0, keyword, DB);
+            oldDataListView.ItemsSource = _oldTrips;
+            newDataListView.ItemsSource = _newTrips;
         }
 
-        // DAO - Data access object
-
-        class PlaceDao
+        private void SearchBox_KeyDown(object sender, KeyEventArgs e)
         {
-            public static BindingList<Place> GetAll()
+            if (e.Key == Key.Enter)
             {
-                var result = new BindingList<Place>()
-                {
-                    new Place() { Name="Đồng bằng sông Cửu Long", Thumbnail="/Images/PlaceImages/DongBangSongCuuLong.jpg" },
-                    new Place() { Name="Hồ Gươm", Thumbnail="/Images/PlaceImages/HoGuom.jpg" },
-                    new Place() { Name="Nhà hát lớn Hà Nội", Thumbnail="/Images/PlaceImages/NhaHatLonHaNoi.jpg" },
-                    new Place() { Name="Phố cổ Hội An", Thumbnail="/Images/PlaceImages/PhoCoHoiAn.jpg" },
-                    new Place() { Name="Phú Quốc", Thumbnail="/Images/PlaceImages/PhuQuoc.jpg" },
-                    new Place() { Name="Quảng trường Ba Đình", Thumbnail="/Images/PlaceImages/QuangTruongBaDinh.jpg" },
-                    new Place() { Name="Ruộng Bậc Thang", Thumbnail="/Images/PlaceImages/RuongBacThang.jpg" },
-                    new Place() { Name="Vịnh Hạ Long", Thumbnail="/Images/PlaceImages/VinhHaLong.jpg" },
-                };
-
-                return result;
+                displayTrip();
             }
         }
 
-        BindingList<Place> _list = new BindingList<Place>();
-
-        Place selected;
-        List<Place> list;
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            _list = PlaceDao.GetAll();
-            oldDataListView.ItemsSource = _list;
-            newDataListView.ItemsSource = _list;
+            displayTrip();
         }
 
         private void oldDataListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selected = oldDataListView.SelectedItem as Place;
+            //selected = oldDataListView.SelectedItem as Place;
 
-            MessageBox.Show(selected.Name);
+            //MessageBox.Show(selected.Name);
         }
 
         private void newDataListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selected = newDataListView.SelectedItem as Place;
+            //selected = newDataListView.SelectedItem as Place;
 
-            MessageBox.Show(selected.Name);
+            //MessageBox.Show(selected.Name);
         }
 
         private void OldDetailButton_Click(object sender, RoutedEventArgs e)
         {
-            selected = (sender as Button).DataContext as Place;
+            //selected = (sender as Button).DataContext as Place;
 
-            MessageBox.Show(selected.Name);
+            //MessageBox.Show(selected.Name);
         }
 
         private void NewDetailButton_Click(object sender, RoutedEventArgs e)
         {
-            selected = (sender as Button).DataContext as Place;
+            //selected = (sender as Button).DataContext as Place;
 
-            MessageBox.Show(selected.Name);
+            //MessageBox.Show(selected.Name);
         }
 
         private void OldUpdateButton_Click(object sender, RoutedEventArgs e)
@@ -106,15 +100,27 @@ namespace WeSplit
 
         private void OldFlagButton_Click(object sender, RoutedEventArgs e)
         {
+            var bt = sender as Button;
+            var item = bt.DataContext;
 
+            selected = item as Trip;
+            selected.Status = 0;
+
+            TripDAO.Instance.SetStatus(selected, DB);
+            displayTrip();
         }
-
 
         private void NewFlagButton_Click(object sender, RoutedEventArgs e)
+
         {
+            var bt = sender as Button;
+            var item = bt.DataContext;
 
+            selected = item as Trip;
+            selected.Status = 1;
+
+            TripDAO.Instance.SetStatus(selected, DB);
+            displayTrip();
         }
-
-
     }
 }
