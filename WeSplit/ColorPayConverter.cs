@@ -12,7 +12,7 @@ namespace WeSplit
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double money = (double)value;
+            float money = (int) value;
             if(money < 0)
             {
                 return "#FFFF0000";

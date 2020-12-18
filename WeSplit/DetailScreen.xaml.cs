@@ -23,33 +23,151 @@ namespace WeSplit
     /// </summary>
     public partial class DetailScreen : UserControl
     {
+        Trip trip;
+
+        BindingList<Waypoint> places = new BindingList<Waypoint>();
+        List<Waypoint> waypoints;
+
+        DetailUi detail = new DetailUi();
         public DetailScreen()
         {
+            int TripID = 1;
             InitializeComponent();
+
+            using (WeSplitEntities db = new WeSplitEntities())
+            {
+                trip = db.Trips.Where(x => x.ID == TripID).FirstOrDefault();
+
+                listLocation.ItemsSource = db.Waypoints.Where(x => x.TripID == TripID).ToList<Waypoint>();
+                detail.Name = trip.Name;
+                listImages.ItemsSource = db.Images.Where(x => x.TripID == TripID).ToList<Image>();
+                detail.ImageCover = db.Images.Where(x => x.TripID == TripID).FirstOrDefault().ImagePath;
+                var status = db.Trips.Where(x => x.ID == TripID).FirstOrDefault().Status;
+
+                detail.Status = db.StatusDescriptions.Where(x => x.Status == status).FirstOrDefault().Description;
+
+                #region SUM and AVERAGE
+                var payments = from m in db.Members
+                               join p in db.Payments
+                               on m.ID equals p.MemberID
+                               into emp from payment in emp.DefaultIfEmpty()
+                               select new
+                               {
+                                   MemberID = m.ID,
+                                   MemberName = m.Name,
+                                   PaymentName = payment.Name,
+                                   PaymentCost = payment.Cost
+                               };
+                   
+                //var payments = db.Payments
+                //   .Join(
+                //   db.Members.Where(x => x.TripID == TripID),
+                //   payment => payment.MemberID,
+                //   member => member.ID,
+                //   (payment, member) => new
+                //   {
+                //       MemberID = member.ID,
+                //       MemberName = member.Name,
+                //       PaymentName = payment.Name,
+                //       PaymentCost = payment.Cost
+                //   }
+                //   );
+               
+                var payment_gb = payments
+                    .GroupBy(g => g.MemberID)
+                    .Select(s => new
+                    {
+                        MemberID = s.Key,
+                        Sum = s.Sum(a => a.PaymentCost)
+                    });
+
+                var memberPerPay = db.Members
+                    .Join(
+                    payment_gb,
+                    member => member.ID,
+                    payment => payment.MemberID,
+                    (member, payment) => new
+                    {
+                        MemberName = member.Name,
+                        PayCost = payment.Sum
+                    }
+                    );
+
+
+
+                var sum = payments.Sum(s => s.PaymentCost);
+                var tong = payment_gb.Sum(s => s.Sum);
+                var average = sum / db.Members.Select(s => s.ID).Distinct().Count();
+
+                var member_AfterSplit = memberPerPay.Select(s => new
+                {
+                    MemberName = s.MemberName,
+                    Pay = (s.PayCost==null?0 : s.PayCost) - average
+                });
+
+
+                #endregion
+
+                listMem.ItemsSource = member_AfterSplit.ToList();
+
+                detail.Sum = sum.ToString() + " VND";
+                detail.Average = average.ToString() + " VND";
+
+
+
+                foreach (var i in memberPerPay)
+                {
+                    listMember.Add(new MemberPaymentChart(i.MemberName, i.PayCost==null?0: (float)i.PayCost));
+                }
+
+                foreach (var i in payments)
+                {
+                    if (i.PaymentName != null&&i.PaymentCost!=null)
+                    {
+                        listPayChart.Add(new PaymentChart(i.PaymentName, (float)i.PaymentCost));
+                    }    
+                    
+                }
+
+            }
+
         }
 
-        public SeriesCollection SeriesCollection => new SeriesCollection
-        {
-            new LineSeries
-            {
-                Values = new ChartValues<double> { 3, 5, 7, 4 }
-            },
-            new ColumnSeries
-            {
-                Values = new ChartValues<decimal> { 5, 6, 2, 7 }
-            }
-        };
 
-        public string[] Labels => new[] { "Jan", "Feb", "Mar", "Apr" };
+        public class MemberPaymentChart
+        {
+            public string MemberName { get; set; }
+            public float PayCost { get; set; }
+            public MemberPaymentChart(string mem, float f)
+            {
+                MemberName = mem;
+                PayCost = f;
+            }
+        }
+
+        public class PaymentChart
+        {
+            public string NamePayment { get; set; }
+            public float PayCost { get; set; }
+            public PaymentChart(string namePayment, float cost)
+            {
+                NamePayment = namePayment;
+                PayCost = cost;
+            }
+        }
+
+
         public class DetailUi
         {
             public string Update { get; set; }
             public string Update_MouseOver { get; set; }
             public string Delete { get; set; }
             public string Delete_MouseOver { get; set; }
-
-            public string[] Labels { get; set; }
-
+            public string ImageCover { get; set; }
+            public string Name { get; set; }
+            public string Status { get; set; }
+            public string Sum { get; set; }
+            public string Average { get; set; }
             public SeriesCollection SeriesCollection { get; set; }
             public SeriesCollection PieSeries { get; set; }
 
@@ -62,7 +180,7 @@ namespace WeSplit
                 Delete_MouseOver = "Images/DetailScreen/delete_mouseOver.png";
             }
 
-            
+
         }
 
         private void updateBtn_Click(object sender, RoutedEventArgs e)
@@ -76,82 +194,45 @@ namespace WeSplit
         }
 
         BindingList<string> listImage = new BindingList<string>();
-        List<Member> listMember = new List<Member>();
-
+        List<MemberPaymentChart> listMember = new List<MemberPaymentChart>();
+        List<PaymentChart> listPayChart = new List<PaymentChart>();
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            //DetailUi detail = new DetailUi();
 
-            //BindingList<Place> Places = new BindingList<Place>() {
-            //new Place("Vinh Ha Long",new DateTime(), new DateTime(),"./Images/PlaceImages/VinhHaLong.jpg"),
-            //new Place("Ho Guom",new DateTime(), new DateTime(),"./Images/PlaceImages/HoGuom.jpg"),
-            //new Place("Nha Hat Lon Ha Noi",new DateTime(), new DateTime(),"./Images/PlaceImages/NhaHatLonHaNoi.jpg"),
-            //new Place("Pho Co Hoi An",new DateTime(), new DateTime(),"./Images/PlaceImages/PhoCoHoiAn.jpg"),
-            //new Place("Phu Quoc",new DateTime(), new DateTime(),"./Images/PlaceImages/PhuQuoc.jpg"),
-            //new Place("Ruong Bac Thang",new DateTime(), new DateTime(),"./Images/PlaceImages/RuongBacThang.jpg")
-            //};
+            detail.SeriesCollection = new SeriesCollection();
 
-            //listLocation.ItemsSource = Places;
+            for (int i = 0; i < listPayChart.Count(); i++)
+            {
+                List<double> values = new List<double> { (listPayChart.ElementAt(i).PayCost < 0) ? (listPayChart.ElementAt(i).PayCost * (-1)) : listPayChart.ElementAt(i).PayCost };
+                ChartValues<double> _ys = new ChartValues<double>(values);
+                detail.SeriesCollection.Add(
+                    new ColumnSeries()
+                    {
+                        Values = _ys,
+                        Title = listPayChart.ElementAt(i).NamePayment,
+                        DataLabels = true
+                    }
+                    );
+            }
 
-            //detail.Labels = new[] { "Jan", "Feb", "Mar", "Apr" };
-          
-
-            //listImage.Add("./Images/PlaceImages/HoGuom.jpg");
-            //listImage.Add("./Images/PlaceImages/NhaHatLonHaNoi.jpg");
-            //listImage.Add("./Images/PlaceImages/PhuQuoc.jpg");
-            //listImage.Add("./Images/PlaceImages/QuangTruongBaDinh.jpg");
-            //listImage.Add("./Images/PlaceImages/RuongbacThang.jpg");
-            //listImage.Add("./Images/PlaceImages/VinhHaLong.jpg");
-            //listImage.Add("./Images/PlaceImages/DongBangSongCuuLong.jpg");
-            //listImage.Add("./Images/PlaceImages/HoGuom.jpg");
-            //listImage.Add("./Images/PlaceImages/HoGuom.jpg");
-            //listImage.Add("./Images/PlaceImages/HoGuom.jpg");
-            //listImage.Add("./Images/PlaceImages/HoGuom.jpg");
-
-            //listImages.ItemsSource = listImage;
-
-            //listMember.Add(new Member("Khắc Tây", 316.67));
-            //listMember.Add(new Member("Túc Hạo", 317.67));
-            //listMember.Add(new Member("Tử Tửu", -316.67));
-            //listMember.Add(new Member("Minh Tuệ", -416.67));
-            //listMember.Add(new Member("Khắc Luân", 306.67));
-
-            //listMem.ItemsSource = listMember;
-
-            
-            //detail.PieSeries = new SeriesCollection();
-            //for(int i = 0; i < listMember.Count(); i++)
-            //{
-            //    List<double> values = new List<double> { (listMember.ElementAt(i).Pay<0)?(listMember.ElementAt(i).Pay*(-1)): listMember.ElementAt(i).Pay };
-            //    ChartValues<double> _ys = new ChartValues<double>(values);
-            //    detail.PieSeries.Add(
-            //        new PieSeries()
-            //        {
-            //            Values = _ys,
-            //            Title = listMember.ElementAt(i).Name_Mem,
-            //            DataLabels = true
-            //        }
-            //        ) ;
-            //}
-
-            //detail.SeriesCollection = new SeriesCollection();
-
-            //for (int i = 0; i < listMember.Count(); i++)
-            //{
-            //    List<double> values = new List<double> { (listMember.ElementAt(i).Pay < 0) ? (listMember.ElementAt(i).Pay * (-1)) : listMember.ElementAt(i).Pay };
-            //    ChartValues<double> _ys = new ChartValues<double>(values);
-            //    detail.SeriesCollection.Add(
-            //        new ColumnSeries()
-            //        {
-            //            Values = _ys,
-            //            Title = listMember.ElementAt(i).Name_Mem,
-            //            DataLabels = true
-            //        }
-            //        );
-            //}
+            detail.PieSeries = new SeriesCollection();
+            for (int i = 0; i < listMember.Count(); i++)
+            {
+                List<double> values = new List<double> { (listMember.ElementAt(i).PayCost < 0) ? (listMember.ElementAt(i).PayCost * (-1)) : listMember.ElementAt(i).PayCost };
+                ChartValues<double> _ys = new ChartValues<double>(values);
+                detail.PieSeries.Add(
+                    new PieSeries()
+                    {
+                        Values = _ys,
+                        Title = listMember.ElementAt(i).MemberName,
+                        DataLabels = true
+                    }
+                    );
+            }
 
 
-            //DataContext = detail;
+
+            DataContext = detail;
         }
 
         private void pieChartExpenditure_DataClick(object sender, LiveCharts.ChartPoint chartPoint)
