@@ -79,8 +79,9 @@ namespace WeSplit
                     addJourneyView.Handler += switchView;
                     GridPrincipal.Children.Add(addJourneyView);
                     break;
-                case 2:
-
+                case 4:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new AboutScreen());
                     break;
                 default:
                     ListViewMenu.SelectedIndex = 0;

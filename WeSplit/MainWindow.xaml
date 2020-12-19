@@ -109,6 +109,12 @@
                             <TextBlock Text="Setting" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
+                    <ListViewItem x:Name="ItemDetail" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Details" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="About" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
                     <ListViewItem x:Name="ItemAbout" Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="About" Height="25" Width="25" Margin="10"/>
