@@ -97,15 +97,12 @@ namespace WeSplit
             //MessageBox.Show(selected.Name);
         }
 
-        private void OldUpdateButton_Click(object sender, RoutedEventArgs e)
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Trip trip = (Trip)(sender as Button).DataContext;
+            Handler?.Invoke(3, trip.ID);
         }
 
-        private void NewUpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void OldFlagButton_Click(object sender, RoutedEventArgs e)
         {

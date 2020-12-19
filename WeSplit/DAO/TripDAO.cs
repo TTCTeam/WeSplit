@@ -26,13 +26,33 @@ namespace WeSplit.DAO
 
         public List<Trip> GetTrips(int status, string keyword, WeSplitEntities DB)
         {
-            List<Trip> listTrips = new List<Trip>();
+            List<Trip> listTrips = null;
 
-            var query = from p in DB.Members
-                        where (p.Trip.Status == status && (p.Name.Contains(keyword) || p.Trip.Name.Contains(keyword)))
-                        select p.Trip;
+            if (status == 0)
+            {
+                var query = from p in DB.Members
+                            where (p.Trip.Status == status && (p.Name.Contains(keyword) || p.Trip.Name.Contains(keyword)))
+                            select p.Trip;
+                listTrips = query.Distinct().ToList();
+            }
+            else if (status == 1)
+            {
+                var query = from p in DB.Members
+                            where ((p.Trip.Status == status || p.Trip.Status == 2)  && (p.Name.Contains(keyword) || p.Trip.Name.Contains(keyword)))
+                            select p.Trip;
+                listTrips = query.Distinct().ToList();
+            }
 
-            listTrips = query.Distinct().ToList();
+            //if (status==0)
+            //{
+            //    listTrips = DB.Trips.Where(p => p.Status==0 && (p.Name.Contains(keyword) || (p.Members.Where(m => m.Name.Contains(keyword))).Count()!=0)).ToList();
+            //}
+            //else if (status==1)
+            //{
+            //    listTrips = DB.Trips.Where(p => (p.Status == 1)||(p.Status==2) && (p.Name.Contains(keyword) || (p.Members.Where(m => m.Name.Contains(keyword))).Count()!=0)).ToList();
+            //}
+
+            
             return listTrips;
         }
 

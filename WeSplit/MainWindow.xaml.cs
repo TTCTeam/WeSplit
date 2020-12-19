@@ -103,7 +103,27 @@ namespace WeSplit
 
         private void switchView(int index)
         {
+            if (isChangeData)
+            {
+                homeScreen = null;
+            }
             ListViewMenu.SelectedIndex = index;
+        }
+
+        private void switchView(int viewIndex, int tripID)
+        {
+            ListViewMenu.SelectedIndex = -1;
+            switch (viewIndex)
+            {
+                case 3:
+                    GridPrincipal.Children.Clear();
+                    AddJourneyView updateJourneyView = new AddJourneyView(tripID);
+                    updateJourneyView.Handler += switchView;
+                    GridPrincipal.Children.Add(updateJourneyView);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)

@@ -7,6 +7,10 @@
              xmlns:local="clr-namespace:WeSplit"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded" Height="700" Width="1200">
+
+    <UserControl.Resources>
+        <local:AbsoluteConverter x:Key="converter"/>
+    </UserControl.Resources>
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:1}">
         <Grid>
             <Grid.RowDefinitions>
@@ -28,7 +32,7 @@
                 <Label Grid.Column="0" FontWeight="Bold" FontStyle="Italic" FontSize="30" Margin="20,20,0,0" Content="DANH SÁCH CHUYẾN ĐI"  Foreground="Gold"/>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0">
                     <materialDesign:PackIcon Kind="Search" Height="30" Width="30" Margin="5" Foreground="White"/>
-                    <TextBox Name="SearchBox" Width="400" Height="30" KeyDown="SearchBox_KeyDown"  BorderThickness="1" BorderBrush="Black" VerticalContentAlignment="Center" FontSize="12">
+                    <TextBox Name="SearchBox" Width="400" Height="30" KeyDown="SearchBox_KeyDown"  BorderThickness="1" BorderBrush="Black" VerticalContentAlignment="Center" FontSize="13" Foreground="White">
                         <TextBox.Style>
                             <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                                 <Style.Resources>
@@ -84,7 +88,7 @@
                                     Orientation="Vertical">
 
                                 <StackPanel.Background>
-                                    <ImageBrush ImageSource="{Binding Thumbnail}"/>
+                                    <ImageBrush ImageSource="{Binding Path=Images[0].ImagePath, Converter={StaticResource converter}}"/>
                                 </StackPanel.Background>
 
                                 <StackPanel.OpacityMask>
@@ -95,7 +99,7 @@
                                        Margin="0,10,0,0"
                                        Text="{Binding Name}"
                                        HorizontalAlignment="Center"
-                                       Foreground="Red"
+                                       Foreground="White"
                                        FontWeight="Bold"
                                        FontSize="18"/>
 
@@ -151,7 +155,7 @@
                                         x:Name="OldUpdateButton"
                                         Background="Transparent"
                                         BorderBrush="White" BorderThickness="1"
-                                        Click="OldUpdateButton_Click">
+                                        Click="UpdateButton_Click">
 
                                         <Button.Resources>
                                             <Style TargetType="{x:Type Border}">
@@ -217,7 +221,7 @@
                                     Orientation="Vertical">
 
                                 <StackPanel.Background>
-                                    <ImageBrush ImageSource="{Binding Thumbnail}"/>
+                                    <ImageBrush ImageSource="{Binding Path=Images[0].ImagePath, Converter={StaticResource converter}}"/>
                                 </StackPanel.Background>
 
                                 <StackPanel.OpacityMask>
@@ -228,7 +232,7 @@
                                        Margin="0,10,0,0"
                                        Text="{Binding Name}"
                                        HorizontalAlignment="Center"
-                                       Foreground="Red"
+                                       Foreground="White"
                                        FontWeight="Bold"
                                        FontSize="18"/>
 
@@ -284,7 +288,7 @@
                                         x:Name="NewUpdateButton"
                                         Background="Transparent"
                                         BorderBrush="White" BorderThickness="1"
-                                        Click="NewUpdateButton_Click">
+                                        Click="UpdateButton_Click">
 
                                         <Button.Resources>
                                             <Style TargetType="{x:Type Border}">

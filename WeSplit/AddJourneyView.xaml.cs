@@ -31,7 +31,7 @@ namespace WeSplit
 
         private int TripIdUpdate { get; set; }
 
-        public delegate void SwitchViewCallback(int index);
+        public delegate void SwitchViewCallback(int viewIndex, bool isDataChange);
         public event SwitchViewCallback Handler;
 
         public AddJourneyView()
@@ -199,14 +199,14 @@ namespace WeSplit
 
 
             //return to homescreen
-            Handler?.Invoke(0);
+            Handler?.Invoke(0, true);
 
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
             //return to homescreen
-            Handler?.Invoke(0);
+            Handler?.Invoke(0, false);
         }
 
 
