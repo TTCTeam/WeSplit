@@ -10,7 +10,9 @@
 
     <UserControl.Resources>
         <local:AbsoluteConverter x:Key="converter"/>
+        <local:FlagConverter x:Key="Converter"/>
     </UserControl.Resources>
+    
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
         <Grid>
             <Grid.RowDefinitions>
@@ -110,7 +112,7 @@
                                     HorizontalAlignment="Right"
                                     Click="OldFlagButton_Click">
                                     <Button.Background>
-                                        <ImageBrush ImageSource="Images/red-flag.png" />
+                                        <ImageBrush ImageSource="{Binding Status, Converter={StaticResource Converter}}" />
                                     </Button.Background>
                                 </Button>
 
@@ -236,7 +238,7 @@
                                        FontWeight="Bold"
                                        FontSize="18"/>
 
-                                <Button BorderThickness="0"
+                                <!--<Button BorderThickness="0"
                                     Margin="0,-26,5,0"
                                     Name="NewFlagButton"
                                     Height="25" Width="25"
@@ -245,7 +247,7 @@
                                     <Button.Background>
                                         <ImageBrush ImageSource="Images/white-flag.png" />
                                     </Button.Background>
-                                </Button>
+                                </Button>-->
 
                                 <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Center"

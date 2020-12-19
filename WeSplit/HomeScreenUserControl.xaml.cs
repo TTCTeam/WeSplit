@@ -97,6 +97,11 @@ namespace WeSplit
             //selected = (sender as Button).DataContext as Place;
 
             //MessageBox.Show(selected.Name);
+            selected = (sender as Button).DataContext as Trip;
+
+            int ID = selected.ID;
+
+            Handler?.Invoke(ID, -1, true);
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
@@ -112,8 +117,15 @@ namespace WeSplit
             var item = bt.DataContext;
 
             selected = item as Trip;
-            selected.Status = 0;
-
+            if (selected.Status == 2)
+            {
+                selected.Status = 1;
+            }
+            else if (selected.Status == 1)
+            {
+                selected.Status = 2;
+            }
+            
             TripDAO.Instance.SetStatus(selected, DB);
             displayTrip();
         }
@@ -121,14 +133,6 @@ namespace WeSplit
         private void NewFlagButton_Click(object sender, RoutedEventArgs e)
 
         {
-            var bt = sender as Button;
-            var item = bt.DataContext;
-
-            selected = item as Trip;
-            selected.Status = 1;
-
-            TripDAO.Instance.SetStatus(selected, DB);
-            displayTrip();
         }
     }
 }

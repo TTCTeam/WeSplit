@@ -109,6 +109,7 @@
     <Compile Include="DetailScreen.xaml.cs">
       <DependentUpon>DetailScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FlagConverter.cs" />
     <Compile Include="Image.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -203,9 +204,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\detail.png" />
-    <Resource Include="Images\red-flag.png" />
+    <None Include="Images\red-flag.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Resource Include="Images\update.png" />
-    <Resource Include="Images\white-flag.png" />
+    <None Include="Images\white-flag.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\SplashScreen\hochiminh.jpg">

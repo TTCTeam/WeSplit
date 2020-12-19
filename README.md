@@ -21,16 +21,19 @@ Hà Minh Cường       -  18120297  -  18120297@student.hcmus.edu.vn
 
 2. HomeScreen:
 		- Liệt kê danh sách các chuyến đi, phân ra theo 2 loại đã từng đi trước đó và đang đi.
+		- Có biểu hiện đã chia tiền và chưa chia tiền: Đã chia tiền sẽ có hình dạng là lá cờ 
+		  màu đỏ trong khi chưa chia tiền là lá cờ màu trắng. Có thể nhấn và thay đổi trạng thái đó.
 		- Xem chi tiết các chuyến đi: Danh sách thành viên, Danh sách các địa điểm, tổng kết
 		  thu chi của cả nhóm (vẽ biểu đồ hình bánh và biểu đồ cột)
 
 3. SearchScreen:
-		- Tìm kiếm món ăn bằng Cơ sở dữ liệu (SQL Server Express 2019), hỗ trợ tất cả các cảnh giới.
+		- Tìm kiếm chuyến đi bằng Cơ sở dữ liệu (SQL Server Express 2019).
 		- Tìm kiếm chuyến đi theo tên của chuyến đi và các thành viên trong chuyến đi đó.
 
 4. CreateJorneyScreen:
 		- Cho phép trường nhóm tạo một chuyến đi mới với các thông tin.
 			+ Tên chuyến đi
+			+ Các hình ảnh
 			+ Thêm lịch trình chuyến đi, các điểm dừng chân.
 			+ Thêm các thành viên
 			+ Thêm các khoản chi
@@ -43,7 +46,8 @@ Hà Minh Cường       -  18120297  -  18120297@student.hcmus.edu.vn
 ```
 ## Các chức năng làm thêm:
 	
-	- Bật tắt SplashScreen ngay trong giao diện chính của chương trình.
+	- Trang About.
+	- Cho phép kéo thả ảnh vào khung hình ảnh lúc thêm chuyến đi.
 
 ##   Các con đường bất hạnh đã giải quyết:
 	
@@ -51,7 +55,7 @@ Hà Minh Cường       -  18120297  -  18120297@student.hcmus.edu.vn
 
 ##    Yêu cầu của phần mềm:
 
-	- Có cài đặt SQL Server Express, có hỗ trợ Full-text Index.
+	- Có cài đặt SQL Server Express, chạy script cài đặt cơ sở dữ liệu trước khi chạy phầm mềm.
 	
 ##   Điểm đề nghị cho đồ án: 10/10.
 

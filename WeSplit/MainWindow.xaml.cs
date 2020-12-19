@@ -110,7 +110,7 @@ namespace WeSplit
             {
                 homeScreen = null;
             }
-            ListViewMenu.SelectedIndex = -1;
+            ListViewMenu.SelectedIndex = 0;
         }
 
         private void switchView(int viewIndex, int tripID)
