@@ -107,7 +107,8 @@ namespace WeSplit
 
                 var sum = payments.Sum(s => s.PaymentCost);
                 var tong = payment_gb.Sum(s => s.Sum);
-                var average = sum / db.Members.Select(s => s.ID).Distinct().Count();
+                int mem = db.Members.Where(x=>x.TripID==TripID).Select(s => s.ID).Distinct().Count();
+                var average = tong / mem;
 
                 var member_AfterSplit = memberPerPay.Select(s => new
                 {
@@ -120,7 +121,7 @@ namespace WeSplit
 
                 listMem.ItemsSource = member_AfterSplit.ToList();
 
-                detail.Sum = sum.ToString() + " VND";
+                detail.Sum = tong.ToString() + " VND";
                 detail.Average = average.ToString() + " VND";
 
 

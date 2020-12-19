@@ -41,6 +41,8 @@ namespace WeSplit
         public delegate void CallDetailView(int TripID, int index, bool isDetail);
         public event CallDetailView Handler;
 
+        public delegate void SwitchViewCallback(int viewIndex, int tripID);
+        public event SwitchViewCallback Handler1;
         void displayTrip()
         {
             var keyword = SearchBox.Text;
@@ -100,7 +102,7 @@ namespace WeSplit
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             Trip trip = (Trip)(sender as Button).DataContext;
-            Handler?.Invoke(3, trip.ID);
+            Handler1?.Invoke(3, trip.ID);   
         }
 
 

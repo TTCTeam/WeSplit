@@ -673,7 +673,7 @@
                                                    Foreground="White"/>
 
                                         <WrapPanel Grid.Column="1">
-                                            <TextBlock Margin="100,0,0,0"
+                                            <TextBlock Margin="30,0,0,0"
                                            HorizontalAlignment="Right"
                                             Text="{Binding Path=Pay}" 
                                                  FontSize="15" 

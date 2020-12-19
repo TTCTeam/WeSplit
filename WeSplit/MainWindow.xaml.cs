@@ -24,7 +24,7 @@ namespace WeSplit
 
         int TripID_detail;
         bool isDetailView = false;
-
+        HomeScreenUserControl homeScreen;
         public MainWindow()
         {
             InitializeComponent();
@@ -53,7 +53,7 @@ namespace WeSplit
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = ListViewMenu.SelectedIndex;
-            HomeScreenUserControl homeScreenUserControl;
+            
             switch (index)
             {
                 case 0:
@@ -67,9 +67,10 @@ namespace WeSplit
                     else
                     {
                         GridPrincipal.Children.Clear();
-                        homeScreenUserControl = new HomeScreenUserControl();
-                        homeScreenUserControl.Handler += callDetailView;
-                        GridPrincipal.Children.Add(homeScreenUserControl);
+                        homeScreen = new HomeScreenUserControl();
+                        homeScreen.Handler += callDetailView;
+                        homeScreen.Handler1 += switchView;
+                        GridPrincipal.Children.Add(homeScreen);
                     }
                     break;
                 case 1:
@@ -101,18 +102,19 @@ namespace WeSplit
 
         }
 
-        private void switchView(int index)
+        private void switchView(int index, bool isChangeData)
         {
+
             if (isChangeData)
             {
                 homeScreen = null;
             }
-            ListViewMenu.SelectedIndex = index;
+            ListViewMenu.SelectedIndex = -1;
         }
 
         private void switchView(int viewIndex, int tripID)
         {
-            ListViewMenu.SelectedIndex = -1;
+            
             switch (viewIndex)
             {
                 case 3:
