@@ -82,6 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AboutScreen.xaml.cs">
+      <DependentUpon>AboutScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AbsoluteConverter.cs" />
     <Compile Include="AddJourneyView.xaml.cs">
       <DependentUpon>AddJourneyView.xaml</DependentUpon>
@@ -131,6 +134,10 @@
     <Compile Include="Waypoint.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Page Include="AboutScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddJourneyView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -268,6 +275,7 @@
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
       <LastGenOutput>DatabaseModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\aboutscreen.jpg" />
     <None Include="Images\0233212f-0277-4290-b0f2-c9cff044ac08\353584de-51f2-414d-8e9c-10200605834e.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
