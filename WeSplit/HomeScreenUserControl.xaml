@@ -88,7 +88,7 @@
                                     Orientation="Vertical">
 
                                 <StackPanel.Background>
-                                    <ImageBrush ImageSource="{Binding Thumbnail}"/>
+                                    <ImageBrush ImageSource="{Binding Path=Images[0].ImagePath, Converter={StaticResource converter}}"/>
                                 </StackPanel.Background>
 
                                 <StackPanel.OpacityMask>
@@ -155,7 +155,7 @@
                                         x:Name="OldUpdateButton"
                                         Background="Transparent"
                                         BorderBrush="White" BorderThickness="1"
-                                        Click="OldUpdateButton_Click">
+                                        Click="UpdateButton_Click">
 
                                         <Button.Resources>
                                             <Style TargetType="{x:Type Border}">
@@ -221,7 +221,7 @@
                                     Orientation="Vertical">
 
                                 <StackPanel.Background>
-                                    <ImageBrush ImageSource="{Binding Thumbnail}"/>
+                                    <ImageBrush ImageSource="{Binding Path=Images[0].ImagePath, Converter={StaticResource converter}}"/>
                                 </StackPanel.Background>
 
                                 <StackPanel.OpacityMask>
@@ -288,7 +288,7 @@
                                         x:Name="NewUpdateButton"
                                         Background="Transparent"
                                         BorderBrush="White" BorderThickness="1"
-                                        Click="NewUpdateButton_Click">
+                                        Click="UpdateButton_Click">
 
                                         <Button.Resources>
                                             <Style TargetType="{x:Type Border}">
