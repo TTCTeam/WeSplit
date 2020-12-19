@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <local:AbsoluteConverter x:Key="converter"/>
     </UserControl.Resources>
-    <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:1}">
+    <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.5*"></RowDefinition>
