@@ -35,7 +35,11 @@ namespace WeSplit
 
         Trip selected;
 
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public delegate void CallDetailView(int TripID, int index, bool isDetail);
+        public event CallDetailView Handler;
 
         void displayTrip()
         {
@@ -76,7 +80,12 @@ namespace WeSplit
 
         private void OldDetailButton_Click(object sender, RoutedEventArgs e)
         {
-            //selected = (sender as Button).DataContext as Place;
+            selected = (sender as Button).DataContext as Trip;
+
+            int ID = selected.ID;
+
+            Handler?.Invoke(ID,-1,true);
+
 
             //MessageBox.Show(selected.Name);
         }

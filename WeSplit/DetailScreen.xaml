@@ -254,7 +254,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" VerticalAlignment="Center">
-                        <TextBlock Text="THÔNG TIN CƠ BẢN"
+                        <TextBlock Text="{Binding Name}"
                                FontWeight="Bold"
                            FontStyle="Italic"
                            FontSize="15" 
@@ -270,7 +270,7 @@
 
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,0,0,0">
-                            <Image Source="{Binding ImageCover}"
+                            <Image Source="{Binding ImageCover, Converter={StaticResource converter}}"
                                                   />
                         </Grid>
 
@@ -278,7 +278,7 @@
                             <StackPanel Orientation="Vertical">
 
                                 <TextBlock                 
-                                    Text="{Binding Name}"
+                                    Text="{Binding Destination}"
                                     Foreground="White"
                                     FontWeight="Bold"
                                     TextWrapping="WrapWithOverflow"
@@ -287,8 +287,8 @@
 
                                 <ListView Background="Black"
                            x:Name="listLocation"
-                                          
-                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  Margin="0,0,5,0"        
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                                   ScrollViewer.CanContentScroll="True"
                             >
 
@@ -326,6 +326,7 @@
                                        Margin="10,0,0,0"
                                         Text="{Binding Path=ArrivalTime}" 
                                                FontSize="15"
+                                                        TextWrapping="WrapWithOverflow"
                                                Foreground="White"/>
 
                                                 </StackPanel>
@@ -336,6 +337,7 @@
                                                Foreground="White"/>
 
                                                     <TextBlock
+                                                        TextWrapping="WrapWithOverflow"
                                         Margin="10,0,0,0"
                                         Text="{Binding Path=LeavingTime}" 
                                                FontSize="15"
@@ -412,7 +414,7 @@
 
                                 <DataTemplate>
                                     <Image Width="210" Height="150"
-                                           Source="{Binding Path = ImagePath}"
+                                           Source="{Binding Path = ImagePath, Converter={StaticResource converter}}"
                                            RenderOptions.BitmapScalingMode="HighQuality"
                                            Stretch="UniformToFill"/>
                                 </DataTemplate>
@@ -641,6 +643,8 @@
                         <ListView Background="Black"
                            x:Name="listMem" BorderThickness="0"                             
                                   Margin="5,5,5,5"
+                                  ScrollViewer.CanContentScroll="True"
+                                  ScrollViewer.VerticalScrollBarVisibility="Visible"
                             >
 
                             <ListView.ItemsPanel>

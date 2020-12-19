@@ -21,13 +21,16 @@ namespace WeSplit
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
+        int TripID_detail;
+        bool isDetailView = false;
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-
+        
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             var mess = MessageBox.Show("Do you want to exit ?", "Notification", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
@@ -50,12 +53,24 @@ namespace WeSplit
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = ListViewMenu.SelectedIndex;
-
+            HomeScreenUserControl homeScreenUserControl;
             switch (index)
             {
                 case 0:
-                    GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new HomeScreenUserControl());
+                    if (isDetailView == true)
+                    {
+                        GridPrincipal.Children.Clear();
+                        DetailScreen detailScreen = new DetailScreen(TripID_detail);
+                        detailScreen.Handler += switchDetailView;
+                        GridPrincipal.Children.Add(detailScreen);
+                    }
+                    else
+                    {
+                        GridPrincipal.Children.Clear();
+                        homeScreenUserControl = new HomeScreenUserControl();
+                        homeScreenUserControl.Handler += callDetailView;
+                        GridPrincipal.Children.Add(homeScreenUserControl);
+                    }
                     break;
                 case 1:
                     GridPrincipal.Children.Clear();
@@ -63,9 +78,27 @@ namespace WeSplit
                     addJourneyView.Handler += switchView;
                     GridPrincipal.Children.Add(addJourneyView);
                     break;
+                case 2:
+
+                    break;
                 default:
+                    ListViewMenu.SelectedIndex = 0;
                     break;
             }
+        }
+
+        private void callDetailView(int TripID, int index, bool isDetail)
+        {
+            TripID_detail = TripID;
+            this.isDetailView = isDetail;
+            ListViewMenu.SelectedIndex = index;
+        }
+
+        private void switchDetailView(int index, bool isDetail)
+        {
+            isDetailView = isDetail;
+            ListViewMenu.SelectedIndex = index;
+
         }
 
         private void switchView(int index)

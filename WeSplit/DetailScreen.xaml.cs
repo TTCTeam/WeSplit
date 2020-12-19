@@ -29,9 +29,18 @@ namespace WeSplit
         List<Waypoint> waypoints;
 
         DetailUi detail = new DetailUi();
+
+        public delegate void SwitchViewCallback(int index, bool isDetail);
+        public event SwitchViewCallback Handler;
         public DetailScreen()
         {
-            int TripID = 1;
+
+            InitializeComponent();
+        }
+
+        public DetailScreen(int TripID)
+        {
+
             InitializeComponent();
 
             using (WeSplitEntities db = new WeSplitEntities())
@@ -45,12 +54,13 @@ namespace WeSplit
                 var status = db.Trips.Where(x => x.ID == TripID).FirstOrDefault().Status;
 
                 detail.Status = db.StatusDescriptions.Where(x => x.Status == status).FirstOrDefault().Description;
-
+                detail.Destination = trip.Destination;
                 #region SUM and AVERAGE
-                var payments = from m in db.Members
+                var payments = from m in db.Members.Where(x => x.TripID == TripID)
                                join p in db.Payments
                                on m.ID equals p.MemberID
-                               into emp from payment in emp.DefaultIfEmpty()
+                               into emp
+                               from payment in emp.DefaultIfEmpty()
                                select new
                                {
                                    MemberID = m.ID,
@@ -58,7 +68,7 @@ namespace WeSplit
                                    PaymentName = payment.Name,
                                    PaymentCost = payment.Cost
                                };
-                   
+
                 //var payments = db.Payments
                 //   .Join(
                 //   db.Members.Where(x => x.TripID == TripID),
@@ -72,7 +82,7 @@ namespace WeSplit
                 //       PaymentCost = payment.Cost
                 //   }
                 //   );
-               
+
                 var payment_gb = payments
                     .GroupBy(g => g.MemberID)
                     .Select(s => new
@@ -102,7 +112,7 @@ namespace WeSplit
                 var member_AfterSplit = memberPerPay.Select(s => new
                 {
                     MemberName = s.MemberName,
-                    Pay = (s.PayCost==null?0 : s.PayCost) - average
+                    Pay = (s.PayCost == null ? 0 : s.PayCost) - average
                 });
 
 
@@ -117,16 +127,16 @@ namespace WeSplit
 
                 foreach (var i in memberPerPay)
                 {
-                    listMember.Add(new MemberPaymentChart(i.MemberName, i.PayCost==null?0: (float)i.PayCost));
+                    listMember.Add(new MemberPaymentChart(i.MemberName, i.PayCost == null ? 0 : (float)i.PayCost));
                 }
 
                 foreach (var i in payments)
                 {
-                    if (i.PaymentName != null&&i.PaymentCost!=null)
+                    if (i.PaymentName != null && i.PaymentCost != null)
                     {
                         listPayChart.Add(new PaymentChart(i.PaymentName, (float)i.PaymentCost));
-                    }    
-                    
+                    }
+
                 }
 
             }
@@ -166,6 +176,7 @@ namespace WeSplit
             public string ImageCover { get; set; }
             public string Name { get; set; }
             public string Status { get; set; }
+            public string Destination { get; set; }
             public string Sum { get; set; }
             public string Average { get; set; }
             public SeriesCollection SeriesCollection { get; set; }
@@ -186,16 +197,32 @@ namespace WeSplit
         private void updateBtn_Click(object sender, RoutedEventArgs e)
         {
 
+
+
+            //return to homescreen
+            Handler?.Invoke(-1, false);
         }
 
         private void deleteBtn_Click(object sender, RoutedEventArgs e)
         {
+
+            using (WeSplitEntities db = new WeSplitEntities())
+            {
+                var trip_temp = db.Trips.Where(x => x.ID == trip.ID).FirstOrDefault();
+                trip_temp.Status = -1;
+
+                db.SaveChanges();
+            }
+
+            //return to homescreen
+            Handler?.Invoke(-1, false);
 
         }
 
         BindingList<string> listImage = new BindingList<string>();
         List<MemberPaymentChart> listMember = new List<MemberPaymentChart>();
         List<PaymentChart> listPayChart = new List<PaymentChart>();
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -205,6 +232,7 @@ namespace WeSplit
             {
                 List<double> values = new List<double> { (listPayChart.ElementAt(i).PayCost < 0) ? (listPayChart.ElementAt(i).PayCost * (-1)) : listPayChart.ElementAt(i).PayCost };
                 ChartValues<double> _ys = new ChartValues<double>(values);
+
                 detail.SeriesCollection.Add(
                     new ColumnSeries()
                     {
@@ -216,6 +244,7 @@ namespace WeSplit
             }
 
             detail.PieSeries = new SeriesCollection();
+
             for (int i = 0; i < listMember.Count(); i++)
             {
                 List<double> values = new List<double> { (listMember.ElementAt(i).PayCost < 0) ? (listMember.ElementAt(i).PayCost * (-1)) : listMember.ElementAt(i).PayCost };
